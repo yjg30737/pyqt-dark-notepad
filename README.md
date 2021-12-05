@@ -4,7 +4,7 @@ PyQt Dark Notepad
 ## Requirements
 * PyQt5 >= 5.8
 
-## Included module (Which are automatically installed)
+## Included module (which are automatically installed)
 * <a href="https://github.com/yjg30737/pyqt-find-replace-text-widget.git">pyqt-find-replace-text-widget</a>
 * <a href="https://github.com/yjg30737/pyqt-font-dialog.git">pyqt-font-dialog</a>
 * <a href="https://github.com/yjg30737/pyqt5-color-dialog.git">pyqt5-color-dialog</a>
