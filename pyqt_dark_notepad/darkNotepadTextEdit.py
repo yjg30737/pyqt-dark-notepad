@@ -29,11 +29,11 @@ class DarkNotepadTextEdit(QTextEdit):
                 super().dropEvent(e)
                 filename = url.path()[1:]
                 self.fileDropped.emit(filename)
-            # Drop the local text
+            # Drop the local text (as plain text)
             else:
                 text = e.mimeData().text()
                 self.append(text)
-        # Drop the web text
+        # Drop the web text (as plain text)
         else:
             text = e.mimeData().text()
             self.append(text)
