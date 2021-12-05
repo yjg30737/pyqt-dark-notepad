@@ -22,11 +22,11 @@ class DarkNotepadTextEdit(QTextEdit):
         super().dragMoveEvent(e)
 
     def dropEvent(self, e):
-        super().dropEvent(e)
         if e.mimeData().hasUrls():
             url = e.mimeData().urls()[-1]
             # Drop the local file (*.txt, *.css ...)
             if url.isLocalFile():
+                super().dropEvent(e)
                 filename = url.path()[1:]
                 self.fileDropped.emit(filename)
             # Drop the local text
