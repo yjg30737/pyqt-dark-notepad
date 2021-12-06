@@ -1,7 +1,7 @@
 import os.path
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QTextCursor
+from PyQt5.QtGui import QTextCursor, QColor
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMenuBar, QMenu, QAction, QFileDialog, qApp, QDialog, \
     QGridLayout, QWidget, QVBoxLayout, QMessageBox
 from pyqt5_color_dialog import ColorPickerDialog
@@ -20,6 +20,7 @@ class DarkNotepad(QMainWindow):
         self.__old_text = ''
         self.__new_text = ''
         self.__changed_flag = False
+        self.__current_text_color = QColor(255, 255, 255)
         self.__initUi()
 
     def __initUi(self):
@@ -47,6 +48,9 @@ class DarkNotepad(QMainWindow):
         css_file = open(css_file_path)
         css_code = css_file.read()
         css_file.close()
+
+        # Set the text color independently
+        self.__textEdit.setTextColor(self.__current_text_color)
 
         self.setStyleSheet(css_code)
 
