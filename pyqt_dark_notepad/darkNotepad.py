@@ -218,16 +218,16 @@ class DarkNotepad(QMainWindow):
         # lay.insertWidget(0, findReplaceTextWidget)
 
     def __setFont(self):
-        dialog = FontDialog()
-        # todo dialog.setFont(currentFont)
+        font = self.__textEdit.font()
+        dialog = FontDialog(font)
         reply = dialog.exec()
         if reply == QDialog.Accepted:
             font = dialog.getFont()
             self.__textEdit.setFont(font)
 
     def __setColor(self):
-        dialog = ColorPickerDialog()
-        # todo dialog.setColor(currentColor)
+        color = self.__textEdit.textColor()
+        dialog = ColorPickerDialog(color)
         reply = dialog.exec()
         if reply == QDialog.Accepted:
             color = dialog.getColor()
