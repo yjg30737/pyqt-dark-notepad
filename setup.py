@@ -14,6 +14,7 @@ setup(
         'PyQt5>=5.8',
         'pyqt-find-replace-text-widget @ git+https://git@github.com/yjg30737/pyqt-find-replace-text-widget.git@main',
         'pyqt-font-dialog @ git+https://git@github.com/yjg30737/pyqt-font-dialog.git@main',
-        'pyqt5-color-dialog @ git+https://git@github.com/yjg30737/pyqt5-color-dialog.git@main'
+        'pyqt5-color-dialog @ git+https://git@github.com/yjg30737/pyqt5-color-dialog.git@main',
+        'pyqt-resource-helpee @ git+https://git@github.com/yjg30737/pyqt-resource-helpee.git@main'
     ]
 )
