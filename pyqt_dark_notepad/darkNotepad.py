@@ -1,9 +1,8 @@
 import os.path
 
-from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QTextCursor, QColor
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMenuBar, QMenu, QAction, QFileDialog, qApp, QDialog, \
-    QGridLayout, QWidget, QVBoxLayout, QMessageBox
+     QWidget, QVBoxLayout, QMessageBox
 from pyqt5_color_dialog import ColorPickerDialog
 from pyqt_find_replace_text_widget import FindReplaceTextWidget
 from pyqt_find_text_widget import FindTextWidget
@@ -11,6 +10,8 @@ from pyqt_font_dialog import FontDialog
 
 from pyqt_dark_notepad.darkNotepadTextEdit import DarkNotepadTextEdit
 from pyqt_dark_notepad.wouldYouSaveMessageBox import WouldYouSaveMessageBox
+
+from pyqt_resource_helper.pyqtResourceHelper import PyQtResourceHelper
 
 
 class DarkNotepad(QMainWindow):
@@ -43,16 +44,10 @@ class DarkNotepad(QMainWindow):
         self.__setActions()
         self.__setMenuBar()
 
-        css_file_path = os.path.join(os.path.dirname(os.path.relpath(__file__, os.getcwd())),
-                                     r'style/dark_gray_theme.css')
-        css_file = open(css_file_path)
-        css_code = css_file.read()
-        css_file.close()
+        PyQtResourceHelper.setStyleSheet([self], ['style/dark_gray_theme.css'])
 
         # Set the text color independently
         self.__textEdit.setTextColor(self.__current_text_color)
-
-        self.setStyleSheet(css_code)
 
     def __setActions(self):
         # filemenu actions
@@ -208,14 +203,14 @@ class DarkNotepad(QMainWindow):
             print(e)
 
     def __find(self):
-        print('find')
+        pass
         # todo
         # findWidget = FindTextWidget(self.__textEdit)
         # lay = self.centralWidget().layout()
         # lay.insertWidget(0, findWidget)
 
     def __replace(self):
-        print('replace')
+        pass
         # todo
         # findReplaceTextWidget = FindReplaceTextWidget(self.__textEdit)
         # lay = self.centralWidget().layout()
