@@ -203,11 +203,9 @@ class DarkNotepad(QMainWindow):
             print(e)
 
     def __find(self):
-        pass
-        # todo
-        # findWidget = FindTextWidget(self.__textEdit)
-        # lay = self.centralWidget().layout()
-        # lay.insertWidget(0, findWidget)
+        findWidget = FindTextWidget(self.__textEdit)
+        lay = self.centralWidget().layout()
+        lay.insertWidget(0, findWidget)
 
     def __replace(self):
         pass
