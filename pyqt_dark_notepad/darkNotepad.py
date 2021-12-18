@@ -49,6 +49,9 @@ class DarkNotepad(QMainWindow):
         # Set the text color independently
         self.__textEdit.setTextColor(self.__current_text_color)
 
+        # Declare find widget in advance
+        self.__findWidget = FindTextWidget(self.__textEdit)
+
     def __setActions(self):
         # filemenu actions
         self.__newAction = QAction('New...')
@@ -203,9 +206,12 @@ class DarkNotepad(QMainWindow):
             print(e)
 
     def __find(self):
-        findWidget = FindTextWidget(self.__textEdit)
-        lay = self.centralWidget().layout()
-        lay.insertWidget(0, findWidget)
+        if self.__findWidget.isVisible():
+            pass
+        else:
+            self.__findWidget.setCloseBtn(True)
+            lay = self.centralWidget().layout()
+            lay.insertWidget(0, self.__findWidget)
 
     def __replace(self):
         pass
