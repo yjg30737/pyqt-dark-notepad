@@ -215,18 +215,18 @@ QTabBar::tab:!selected:hover
 QMenu { background-color: #444; border: 1px solid #666;}
 QMenu::item { background-color: #444; color: #DDD; }                                
 QMenu::item:selected { /* when user selects item using mouse or keyboard */ background-color: #666; }
-QMenu::item:disabled { color: #CCCCCC; }
+QMenu::item:disabled { color: #999; }
 QMenu::separator { background-color: #555; height: 1px;}
 
 QMenuBar { background-color: #444; color: white; }
 
-                                    QMenuBar::item:selected { /* when selected using mouse or keyboard */
-                                        background: #666;
-                                    }
-                                    
-                                    QMenuBar::item:pressed {
-                                        background: #555;
-                                    }
+QMenuBar::item:selected { /* when selected using mouse or keyboard */
+    background: #666;
+}
+
+QMenuBar::item:pressed {
+    background: #555;
+}
 
 QMenuBar::item:disabled {
 	color: #CCCCCC;

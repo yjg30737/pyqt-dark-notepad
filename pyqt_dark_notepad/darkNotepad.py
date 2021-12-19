@@ -111,6 +111,8 @@ class DarkNotepad(QMainWindow):
         filemenu.addAction(self.__openAction)
         filemenu.addAction(self.__saveAction)
         filemenu.addAction(self.__saveAsAction)
+        self.__openRecentMenu = filemenu.addMenu('Open Recent')
+        self.__initOpenRecentFilesActionMenu()
         filemenu.addSeparator()
         filemenu.addAction(self.__quitAction)
 
@@ -285,6 +287,11 @@ class DarkNotepad(QMainWindow):
                 e.ignore()
             else:
                 e.ignore()
+
+    def __initOpenRecentFilesActionMenu(self):
+        noRecentFilesTextAction = QAction('No recent files', self)
+        noRecentFilesTextAction.setEnabled(False)
+        self.__openRecentMenu.addAction(noRecentFilesTextAction)
 
 
 if __name__ == "__main__":
