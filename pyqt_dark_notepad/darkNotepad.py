@@ -261,10 +261,12 @@ class DarkNotepad(QMainWindow):
     def __find(self):
         self.__findReplaceWidget.setVisible(True)
         self.__findReplaceWidget.setOnlyFindTextWidget(True)
+        self.__findReplaceWidget.setFocus()
 
     def __replace(self):
         self.__findReplaceWidget.setVisible(True)
         self.__findReplaceWidget.setOnlyFindTextWidget(False)
+        self.__findReplaceWidget.setFocus()
 
     def __setFont(self):
         font = self.__textEdit.font()
