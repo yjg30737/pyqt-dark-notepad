@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QTextEdit, QApplication
 
 class DarkNotepadTextEdit(QTextEdit):
     fileDropped = pyqtSignal(str)
+    zoomSignal = pyqtSignal(int)
 
     def __init__(self):
         super().__init__()
