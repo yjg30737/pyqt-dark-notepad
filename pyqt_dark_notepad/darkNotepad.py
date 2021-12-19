@@ -2,7 +2,7 @@ import os.path
 
 from PyQt5.QtGui import QTextCursor, QColor
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMenuBar, QMenu, QAction, QFileDialog, qApp, QDialog, \
-     QWidget, QVBoxLayout, QMessageBox
+    QWidget, QVBoxLayout, QMessageBox, QActionGroup
 from pyqt5_color_dialog import ColorPickerDialog
 from pyqt_find_replace_text_widget import FindReplaceTextWidget
 from pyqt_find_text_widget import FindTextWidget
@@ -93,6 +93,16 @@ class DarkNotepad(QMainWindow):
         self.__colorAction = QAction('Color')
         self.__colorAction.triggered.connect(self.__setColor)
 
+        # viewmenu actions
+        self.__zoomInAction = QAction('Zoom in')
+        self.__zoomInAction.triggered.connect(self.__zoomIn)
+
+        self.__zoomOutAction = QAction('Zoom out')
+        self.__zoomOutAction.triggered.connect(self.__zoomOut)
+
+        self.__zoomResetAction = QAction('Reset')
+        self.__zoomResetAction.triggered.connect(self.__zoomReset)
+
     def __setMenuBar(self):
         menubar = QMenuBar()
 
@@ -113,7 +123,12 @@ class DarkNotepad(QMainWindow):
         formatmenu.addAction(self.__colorAction)
 
         viewmenu = QMenu('View', self)
-        # todo zoom in, zoom out
+
+        group_menu = viewmenu.addMenu('Zoom in/out')
+        group_menu.addAction(self.__zoomInAction)
+        group_menu.addAction(self.__zoomOutAction)
+        group_menu.addSeparator()
+        group_menu.addAction(self.__zoomResetAction)
 
         menubar.addMenu(filemenu)
         menubar.addMenu(editmenu)
@@ -249,6 +264,15 @@ class DarkNotepad(QMainWindow):
 
             # Set text color of textedit in general
             self.__textEdit.setTextColor(color)
+
+    def __zoomIn(self):
+        self.__textEdit.zoomIn(10)
+
+    def __zoomOut(self):
+        self.__textEdit.zoomOut(10)
+
+    def __zoomReset(self):
+        self.__textEdit.zoomInit()
 
     def closeEvent(self, e):
         if self.__changed_flag:

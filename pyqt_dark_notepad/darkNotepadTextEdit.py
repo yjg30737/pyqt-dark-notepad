@@ -1,7 +1,5 @@
-import os
-
-from PyQt5.QtCore import pyqtSignal
-from PyQt5.QtWidgets import QTextEdit
+from PyQt5.QtCore import pyqtSignal, Qt
+from PyQt5.QtWidgets import QTextEdit, QApplication
 
 
 class DarkNotepadTextEdit(QTextEdit):
@@ -9,6 +7,11 @@ class DarkNotepadTextEdit(QTextEdit):
 
     def __init__(self):
         super().__init__()
+        self.__scale = 100
+        self.__min = 10
+        self.__max = 400
+        self.__step = 10
+        self.__init = 100
         self.setAcceptDrops(True)
 
     def dragEnterEvent(self, e):
@@ -37,3 +40,42 @@ class DarkNotepadTextEdit(QTextEdit):
         else:
             text = e.mimeData().text()
             self.append(text)
+
+    def wheelEvent(self, e):
+        modifiers = QApplication.keyboardModifiers()
+        if modifiers == Qt.ControlModifier:
+            if e.angleDelta().y() > 0:
+                self.zoomIn(10)
+            else:
+                self.zoomOut(10)
+        return super().wheelEvent(e)
+
+    def zoomInit(self):
+        default_scale = 100
+        if self.__scale > default_scale:
+            while True:
+                if self.__scale-10 < default_scale:
+                    self.__scale = 100
+                    self.zoomSignal.emit(self.__scale)
+                    break
+                self.zoomOut(10)
+        else:
+            while True:
+                if self.__scale+10 > default_scale:
+                    self.__scale = 100
+                    self.zoomSignal.emit(self.__scale)
+                    break
+                self.zoomIn(10)
+
+    def zoomIn(self, range: int = ...) -> None:
+        if self.__scale < self.__max:
+            super().zoomIn()
+            self.__scale += 10
+            self.zoomSignal.emit(self.__scale)
+
+    def zoomOut(self, range: int = ...) -> None:
+        if self.__scale > self.__min:
+            super().zoomOut()
+            self.__scale -= 10
+            self.zoomSignal.emit(self.__scale)
+
