@@ -1,8 +1,8 @@
 import os.path
 
-from PyQt5.QtGui import QTextCursor, QColor
+from PyQt5.QtGui import QTextCursor, QColor, QTextDocument
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMenuBar, QMenu, QAction, QFileDialog, qApp, QDialog, \
-    QWidget, QVBoxLayout, QMessageBox, QActionGroup
+    QWidget, QVBoxLayout, QMessageBox, QActionGroup, QLabel
 from pyqt5_color_dialog import ColorPickerDialog
 from pyqt_find_replace_text_widget import FindReplaceTextWidget
 from pyqt_find_text_widget import FindTextWidget
@@ -29,6 +29,8 @@ class DarkNotepad(QMainWindow):
         self.setWindowTitle(self.__title.format(self.__cur_filename))
         self.__textEdit = DarkNotepadTextEdit()
         self.__textEdit.textChanged.connect(self.__setChangedFlag)
+        self.__textEdit.cursorPositionChanged.connect(self.__renewRcInfoInStatusBar)
+        self.__textEdit.textChanged.connect(self.__renewCharsLinesCountInStatusBar)
         self.__textEdit.fileDropped.connect(self.__execOpen)
 
         # Declare find widget in advance
@@ -151,6 +153,24 @@ class DarkNotepad(QMainWindow):
         self.__statusBar = self.statusBar()
         self.__statusBar.setVisible(True)
         self.__statusBar.setSizeGripEnabled(False)
+
+        self.__rcLabelText = '{0}:{1}'
+        self.__rcLabel = QLabel()
+        self.__charsLinesCountText = '{0} chars, {1} lines'
+        self.__charsLinesCountLabel = QLabel()
+        self.__statusBar.addPermanentWidget(self.__rcLabel)
+        self.__statusBar.addPermanentWidget(self.__charsLinesCountLabel)
+        self.__renewRcInfoInStatusBar()
+        self.__renewCharsLinesCountInStatusBar()
+
+    def __renewRcInfoInStatusBar(self):
+        cur = self.__textEdit.textCursor()
+        r, c = cur.blockNumber()+1, cur.positionInBlock()+1
+        self.__rcLabel.setText(self.__rcLabelText.format(r, c))
+
+    def __renewCharsLinesCountInStatusBar(self):
+        self.__charsLinesCountLabel.setText(self.__charsLinesCountText.format(len(self.__textEdit.toPlainText()),
+                                                                                  self.__textEdit.document().lineCount()))
 
     def __setChangedFlag(self):
         self.__new_text = self.__textEdit.toPlainText()

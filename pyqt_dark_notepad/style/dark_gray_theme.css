@@ -258,3 +258,11 @@ QTimeEdit {
 	background-color: #444;
 	color: #DDD;
 }
+
+QStatusBar::item {
+    border: 0;
+}
+
+QStatusBar QLabel {
+    margin-right: 2;
+}
