@@ -48,9 +48,9 @@ class DarkNotepad(QMainWindow):
 
         self.setCentralWidget(mainWidget)
 
+        self.__setStatusBar()
         self.__setActions()
         self.__setMenuBar()
-        self.__setStatusBar()
 
         PyQtResourceHelper.setStyleSheet([self], ['style/dark_gray_theme.css'])
 
@@ -104,6 +104,11 @@ class DarkNotepad(QMainWindow):
         self.__zoomResetAction = QAction('Reset')
         self.__zoomResetAction.triggered.connect(self.__zoomReset)
 
+        self.__statusBarAction = QAction("Show status bar", self)
+        self.__statusBarAction.setCheckable(True)
+        self.__statusBarAction.setChecked(True)
+        self.__statusBarAction.toggled.connect(self.__statusBar.setVisible)
+
     def __setMenuBar(self):
         menubar = QMenuBar()
 
@@ -133,6 +138,8 @@ class DarkNotepad(QMainWindow):
         group_menu.addSeparator()
         group_menu.addAction(self.__zoomResetAction)
 
+        viewmenu.addAction(self.__statusBarAction)
+
         menubar.addMenu(filemenu)
         menubar.addMenu(editmenu)
         menubar.addMenu(formatmenu)
@@ -141,8 +148,9 @@ class DarkNotepad(QMainWindow):
         self.setMenuBar(menubar)
 
     def __setStatusBar(self):
-        statusBar = self.statusBar()
-        statusBar.setSizeGripEnabled(False)
+        self.__statusBar = self.statusBar()
+        self.__statusBar.setVisible(True)
+        self.__statusBar.setSizeGripEnabled(False)
 
     def __setChangedFlag(self):
         self.__new_text = self.__textEdit.toPlainText()
