@@ -50,6 +50,7 @@ class DarkNotepad(QMainWindow):
 
         self.__setActions()
         self.__setMenuBar()
+        self.__setStatusBar()
 
         PyQtResourceHelper.setStyleSheet([self], ['style/dark_gray_theme.css'])
 
@@ -138,6 +139,10 @@ class DarkNotepad(QMainWindow):
         menubar.addMenu(viewmenu)
 
         self.setMenuBar(menubar)
+
+    def __setStatusBar(self):
+        statusBar = self.statusBar()
+        statusBar.setSizeGripEnabled(False)
 
     def __setChangedFlag(self):
         self.__new_text = self.__textEdit.toPlainText()
