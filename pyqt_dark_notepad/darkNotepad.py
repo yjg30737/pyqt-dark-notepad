@@ -34,13 +34,12 @@ class DarkNotepad(QMainWindow):
         self.__textEdit.fileDropped.connect(self.__execOpen)
 
         # Declare find widget in advance
-        self.__findWidget = FindTextWidget(self.__textEdit)
-        self.__findWidget.setCloseBtn(True)
+        self.__findReplaceWidget = FindReplaceTextWidget(self.__textEdit)
         # Hide in default (make it show to use find feature)
-        self.__findWidget.setVisible(False)
+        self.__findReplaceWidget.setVisible(False)
 
         lay = QVBoxLayout()
-        lay.addWidget(self.__findWidget)
+        lay.addWidget(self.__findReplaceWidget)
         lay.addWidget(self.__textEdit)
         lay.setContentsMargins(0, 0, 0, 0)
         lay.setSpacing(0)
@@ -260,17 +259,12 @@ class DarkNotepad(QMainWindow):
             print(e)
 
     def __find(self):
-        if self.__findWidget.isVisible():
-            pass
-        else:
-            self.__findWidget.setVisible(True)
+        self.__findReplaceWidget.setVisible(True)
+        self.__findReplaceWidget.setOnlyFindTextWidget(True)
 
     def __replace(self):
-        pass
-        # todo
-        # findReplaceTextWidget = FindReplaceTextWidget(self.__textEdit)
-        # lay = self.centralWidget().layout()
-        # lay.insertWidget(0, findReplaceTextWidget)
+        self.__findReplaceWidget.setVisible(True)
+        self.__findReplaceWidget.setOnlyFindTextWidget(False)
 
     def __setFont(self):
         font = self.__textEdit.font()
