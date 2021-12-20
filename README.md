@@ -15,10 +15,10 @@ PyQt Dark Notepad
 
 ## Feature
 * New, Open, Save, Save As
-* Font, Color Settings
+* Font, color settings
 * Drag and drop from local file and text(local and web)
 * Show "Would you save" message box before closing (If untitled or opened file was modified)
-* Find texts (option to choose case sensitivity level)
+* Find, replace texts (option to choose case sensitivity level)
 * Zoom in/out, reset (Ctrl+Mouse wheel moving)
 
 ## Code Example
