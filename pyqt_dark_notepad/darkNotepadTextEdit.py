@@ -80,3 +80,5 @@ class DarkNotepadTextEdit(QTextEdit):
             self.__scale -= 10
             self.zoomSignal.emit(self.__scale)
 
+    def getScale(self):
+        return self.__scale

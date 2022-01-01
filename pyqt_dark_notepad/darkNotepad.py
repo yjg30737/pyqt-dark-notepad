@@ -152,6 +152,10 @@ class DarkNotepad(QMainWindow):
         self.__statusBar = self.statusBar()
         self.__statusBar.setVisible(True)
         self.__statusBar.setSizeGripEnabled(False)
+        
+        self.__zoomScaleText = '{0}%'
+        self.__zoomScaleLabel = QLabel()
+        self.__zoomScaleLabel.setText(self.__zoomScaleText.format(self.__textEdit.getScale()))
 
         self.__fontLabelText = '{0}, {1}pt'
         self.__fontLabel = QLabel()
@@ -163,6 +167,7 @@ class DarkNotepad(QMainWindow):
         self.__charsLinesCountText = '{0} chars, {1} lines'
         self.__charsLinesCountLabel = QLabel()
 
+        self.__statusBar.addPermanentWidget(self.__zoomScaleLabel)
         self.__statusBar.addPermanentWidget(self.__fontLabel)
         self.__statusBar.addPermanentWidget(self.__rcLabel)
         self.__statusBar.addPermanentWidget(self.__charsLinesCountLabel)
@@ -277,6 +282,7 @@ class DarkNotepad(QMainWindow):
 
     def __setFont(self):
         font = self.__textEdit.font()
+        font.setPointSize(int(self.__fontLabel.text().split(',')[1][:-2]))
         dialog = FontDialog(font)
         reply = dialog.exec()
         if reply == QDialog.Accepted:
@@ -306,12 +312,15 @@ class DarkNotepad(QMainWindow):
 
     def __zoomIn(self):
         self.__textEdit.zoomIn(10)
+        self.__zoomScaleLabel.setText(self.__zoomScaleText.format(self.__textEdit.getScale()))
 
     def __zoomOut(self):
         self.__textEdit.zoomOut(10)
+        self.__zoomScaleLabel.setText(self.__zoomScaleText.format(self.__textEdit.getScale()))
 
     def __zoomReset(self):
         self.__textEdit.zoomInit()
+        self.__zoomScaleLabel.setText(self.__zoomScaleText.format(100))
 
     def closeEvent(self, e):
         if self.__changed_flag:
