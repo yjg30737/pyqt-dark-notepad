@@ -20,6 +20,7 @@ PyQt Dark Notepad
 * Show "Would you save" message box before closing (If untitled or opened file was modified)
 * Find, replace texts (option to choose case sensitivity level)
 * Zoom in/out, reset (Ctrl+Mouse wheel moving)
+* Show various info on status bar
 
 ## Code Example
 ```python
