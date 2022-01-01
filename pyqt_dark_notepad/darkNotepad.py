@@ -3,7 +3,7 @@ import os.path
 from PyQt5.QtGui import QTextCursor, QColor, QTextDocument
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMenuBar, QMenu, QAction, QFileDialog, qApp, QDialog, \
     QWidget, QVBoxLayout, QMessageBox, QActionGroup, QLabel
-from pyqt5_color_dialog import ColorPickerDialog
+from pyqt_color_dialog import ColorPickerDialog
 from pyqt_find_replace_text_widget import FindReplaceTextWidget
 from pyqt_find_text_widget import FindTextWidget
 from pyqt_font_dialog import FontDialog

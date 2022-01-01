@@ -1,4 +1,4 @@
 git+https://git@github.com/yjg30737/pyqt-find-replace-text-widget.git@main
 git+https://git@github.com/yjg30737/pyqt-font-dialog.git@main
-git+https://git@github.com/yjg30737/pyqt5-color-dialog.git@main
+git+https://git@github.com/yjg30737/pyqt-color-dialog.git@main
 git+https://git@github.com/yjg30737/pyqt-resource-helper.git@main
