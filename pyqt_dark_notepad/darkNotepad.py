@@ -153,10 +153,17 @@ class DarkNotepad(QMainWindow):
         self.__statusBar.setVisible(True)
         self.__statusBar.setSizeGripEnabled(False)
 
+        self.__fontLabelText = '{0}, {1}pt'
+        self.__fontLabel = QLabel()
+        font = self.__textEdit.currentFont()
+        self.__fontLabel.setText(self.__fontLabelText.format(font.family(), font.pointSize()))
+
         self.__rcLabelText = '{0}:{1}'
         self.__rcLabel = QLabel()
         self.__charsLinesCountText = '{0} chars, {1} lines'
         self.__charsLinesCountLabel = QLabel()
+
+        self.__statusBar.addPermanentWidget(self.__fontLabel)
         self.__statusBar.addPermanentWidget(self.__rcLabel)
         self.__statusBar.addPermanentWidget(self.__charsLinesCountLabel)
         self.__renewRcInfoInStatusBar()
@@ -275,6 +282,7 @@ class DarkNotepad(QMainWindow):
         if reply == QDialog.Accepted:
             font = dialog.getFont()
             self.__textEdit.setFont(font)
+            self.__fontLabel.setText(self.__fontLabelText.format(font.family(), font.pointSize()))
 
     def __setColor(self):
         color = self.__textEdit.textColor()
