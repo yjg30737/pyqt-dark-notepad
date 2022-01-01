@@ -7,7 +7,7 @@ PyQt Dark Notepad
 ## Included pacakges
 * <a href="https://github.com/yjg30737/pyqt-find-replace-text-widget.git">pyqt-find-replace-text-widget</a>
 * <a href="https://github.com/yjg30737/pyqt-font-dialog.git">pyqt-font-dialog</a>
-* <a href="https://github.com/yjg30737/pyqt5-color-dialog.git">pyqt5-color-dialog</a>
+* <a href="https://github.com/yjg30737/pyqt-color-dialog.git">pyqt-color-dialog</a>
 * <a href="https://github.com/yjg30737/pyqt-resource-helper.git">pyqt-resource-helper</a>
 
 ## Setup
