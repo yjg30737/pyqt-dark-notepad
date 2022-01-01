@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pyqt-dark-notepad',
-    version='0.2.1',
+    version='0.3.1',
     author='Jung Gyu Yoon',
     author_email='yjg30737@gmail.com',
     license='MIT',
@@ -14,7 +14,6 @@ setup(
         'PyQt5>=5.8',
         'pyqt-find-replace-text-widget @ git+https://git@github.com/yjg30737/pyqt-find-replace-text-widget.git@main',
         'pyqt-font-dialog @ git+https://git@github.com/yjg30737/pyqt-font-dialog.git@main',
-        'pyqt-color-dialog @ git+https://git@github.com/yjg30737/pyqt-color-dialog.git@main',
-        'pyqt-resource-helper @ git+https://git@github.com/yjg30737/pyqt-resource-helper.git@main'
+        'pyqt-color-dialog @ git+https://git@github.com/yjg30737/pyqt-color-dialog.git@main'
     ]
 )
