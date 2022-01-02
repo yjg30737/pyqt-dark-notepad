@@ -32,6 +32,7 @@ class DarkNotepad(QMainWindow):
         self.__textEdit.cursorPositionChanged.connect(self.__renewRcInfoInStatusBar)
         self.__textEdit.textChanged.connect(self.__renewCharsLinesCountInStatusBar)
         self.__textEdit.fileDropped.connect(self.__execOpen)
+        self.__textEdit.zoomSignal.connect(self.__zoomByWheel)
 
         # Declare find widget in advance
         self.__findReplaceWidget = FindReplaceTextWidget(self.__textEdit)
@@ -309,6 +310,11 @@ class DarkNotepad(QMainWindow):
 
             # Set text color of textedit in general
             self.__textEdit.setTextColor(color)
+
+    def __zoomByWheel(self, n):
+        self.__zoomScaleLabel.setText(self.__zoomScaleText.format(n))
+        self.__zoomInAction.setEnabled(n < 400)
+        self.__zoomOutAction.setEnabled(n > 10)
 
     def __zoomIn(self):
         self.__textEdit.zoomIn(10)
