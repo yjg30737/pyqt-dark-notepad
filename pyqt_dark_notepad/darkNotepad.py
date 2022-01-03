@@ -163,12 +163,18 @@ class DarkNotepad(QMainWindow):
         font = self.__textEdit.currentFont()
         self.__fontLabel.setText(self.__fontLabelText.format(font.family(), font.pointSize()))
 
+        self.__colorLabelText = '{0}'
+        self.__colorLabel = QLabel()
+        # todo get initial color properly (supposed to get #FFFFFF get #000000 instead)
+        self.__colorLabel.setText(self.__colorLabelText.format('#FFFFFF'))
+
         self.__rcLabelText = '{0}:{1}'
         self.__rcLabel = QLabel()
         self.__charsLinesCountText = '{0} chars, {1} lines'
         self.__charsLinesCountLabel = QLabel()
 
         self.__statusBar.addPermanentWidget(self.__zoomScaleLabel)
+        self.__statusBar.addPermanentWidget(self.__colorLabel)
         self.__statusBar.addPermanentWidget(self.__fontLabel)
         self.__statusBar.addPermanentWidget(self.__rcLabel)
         self.__statusBar.addPermanentWidget(self.__charsLinesCountLabel)
@@ -310,6 +316,8 @@ class DarkNotepad(QMainWindow):
 
             # Set text color of textedit in general
             self.__textEdit.setTextColor(color)
+
+            self.__colorLabel.setText(self.__colorLabelText.format(color.name()))
 
     def __zoomByWheel(self, n):
         self.__zoomScaleLabel.setText(self.__zoomScaleText.format(n))
