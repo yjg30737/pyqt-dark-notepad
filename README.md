@@ -8,6 +8,7 @@ PyQt Dark Notepad
 * <a href="https://github.com/yjg30737/pyqt-find-replace-text-widget.git">pyqt-find-replace-text-widget</a>
 * <a href="https://github.com/yjg30737/pyqt-font-dialog.git">pyqt-font-dialog</a>
 * <a href="https://github.com/yjg30737/pyqt-color-dialog.git">pyqt-color-dialog</a>
+* <a href="https://github.com/yjg30737/pyqt-line-number-widget.git">pyqt-line-number-widget</a>
 
 ## Setup
 ```pip3 install git+https://github.com/yjg30737/pyqt-dark-notepad.git --upgrade```
@@ -20,6 +21,7 @@ PyQt Dark Notepad
 * Find, replace texts (option to choose case sensitivity level)
 * Zoom in/out, reset (Ctrl+Mouse wheel moving)
 * Show various info on status bar
+* Show as full screen
 
 ## Code Example
 ```python
