@@ -40,3 +40,6 @@ if __name__ == "__main__":
 ## Preview
 ![image](https://user-images.githubusercontent.com/55078043/146741214-c6bb76af-3825-4f76-97da-7fe51ebf8df5.png)
 
+## Note
+Line edit widget doesn't properly work after user zoom in/out the widget or resize the font.
+
