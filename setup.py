@@ -2,12 +2,13 @@ from setuptools import setup, find_packages
 
 setup(
     name='pyqt-dark-notepad',
-    version='0.6.0',
+    version='0.6.1',
     author='Jung Gyu Yoon',
     author_email='yjg30737@gmail.com',
     license='MIT',
     packages=find_packages(),
-    package_data={'pyqt_dark_notepad.style': ['dark_gray_theme.css', 'no_icon_button.css']},
+    package_data={'pyqt_dark_notepad.style': ['dark_gray_theme.css', 'no_icon_button.css', 'icon_button.css'],
+                  'pyqt_dark_notepad.ico': ['close.png']},
     description='Dark notepad made of PyQt5',
     url='https://github.com/yjg30737/pyqt-dark-notepad.git',
     install_requires=[
