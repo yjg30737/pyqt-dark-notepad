@@ -22,7 +22,8 @@ PyQt Dark Notepad
 * Zoom in/out, reset (Ctrl+Mouse wheel moving)
 * Show various info on status bar
 * Show as full screen
-* Being able to show/hide menu bar. You can hide menu bar with close button on the right corner of menu bar, show menu bar with place the mouse cursor on the top of the text widget. 
+* Being able to show/hide menu bar. You can hide menu bar with close button on the right corner of menu bar, show menu bar with place the mouse cursor on the top of the text widget.
+* Show line number widget (it doesn't work properly so far)
 
 ## Code Example
 ```python
