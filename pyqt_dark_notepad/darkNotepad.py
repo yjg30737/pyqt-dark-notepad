@@ -1,16 +1,18 @@
 import os.path
 
-from PyQt5.QtGui import QTextCursor, QColor, QTextDocument
+from PyQt5.QtCore import Qt
+
+from PyQt5.QtGui import QTextCursor, QColor
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMenuBar, QMenu, QAction, QFileDialog, qApp, QDialog, \
-    QWidget, QVBoxLayout, QMessageBox, QActionGroup, QLabel
+    QWidget, QVBoxLayout, QMessageBox, QLabel, QHBoxLayout
 from pyqt_color_dialog import ColorPickerDialog
 from pyqt_find_replace_text_widget import FindReplaceTextWidget
-from pyqt_find_text_widget import FindTextWidget
 from pyqt_font_dialog import FontDialog
 
 from pyqt_dark_notepad.darkNotepadTextEdit import DarkNotepadTextEdit
 from pyqt_dark_notepad.wouldYouSaveMessageBox import WouldYouSaveMessageBox
 
+from pyqt_line_number_widget.lineNumberWidget import LineNumberWidget
 from pyqt_resource_helper.pyqtResourceHelper import PyQtResourceHelper
 
 
@@ -27,10 +29,12 @@ class DarkNotepad(QMainWindow):
     def __initUi(self):
         self.__title = '{0} - Dark notepad'
         self.setWindowTitle(self.__title.format(self.__cur_filename))
+
         self.__textEdit = DarkNotepadTextEdit()
         self.__textEdit.textChanged.connect(self.__setChangedFlag)
-        self.__textEdit.cursorPositionChanged.connect(self.__renewRcInfoInStatusBar)
         self.__textEdit.textChanged.connect(self.__renewCharsLinesCountInStatusBar)
+        self.__textEdit.textChanged.connect(self.__lineWidgetLineCountChanged)
+        self.__textEdit.cursorPositionChanged.connect(self.__renewRcInfoInStatusBar)
         self.__textEdit.fileDropped.connect(self.__execOpen)
         self.__textEdit.zoomSignal.connect(self.__zoomByWheel)
 
@@ -45,6 +49,17 @@ class DarkNotepad(QMainWindow):
         lay.setContentsMargins(0, 0, 0, 0)
         lay.setSpacing(0)
 
+        rightWidget = QWidget()
+        rightWidget.setLayout(lay)
+
+        self.__lineNumberWidget = LineNumberWidget(self.__textEdit)
+        self.__lineNumberWidget.setVisible(False)
+
+        lay = QHBoxLayout()
+        lay.addWidget(self.__lineNumberWidget)
+        lay.addWidget(rightWidget)
+        lay.setContentsMargins(0, 0, 0, 0)
+
         mainWidget = QWidget()
         mainWidget.setLayout(lay)
 
@@ -58,6 +73,11 @@ class DarkNotepad(QMainWindow):
 
         # Set the text color independently
         self.__textEdit.setTextColor(self.__current_text_color)
+
+    # todo make line widget successfully interact with zoom in, out, backspace in the middle of text widget
+    def __lineWidgetLineCountChanged(self):
+        n = int(self.__textEdit.document().lineCount())
+        self.__lineNumberWidget.changeLineCount(n)
 
     def __setActions(self):
         # filemenu actions
@@ -111,6 +131,17 @@ class DarkNotepad(QMainWindow):
         self.__statusBarAction.setChecked(True)
         self.__statusBarAction.toggled.connect(self.__statusBar.setVisible)
 
+        self.__lineNumberAction = QAction("Show line numbers", self)
+        self.__lineNumberAction.setCheckable(True)
+        self.__lineNumberAction.setChecked(False)
+        self.__lineNumberAction.toggled.connect(self.__lineNumberWidget.setVisible)
+
+        self.__fullScreenAction = QAction("Show as full screen", self)
+        self.__fullScreenAction.setShortcut('F11')
+        self.__fullScreenAction.setCheckable(True)
+        self.__fullScreenAction.setChecked(False)
+        self.__fullScreenAction.toggled.connect(self.__fullScreenToggled)
+
     def __setMenuBar(self):
         menubar = QMenuBar()
 
@@ -141,6 +172,8 @@ class DarkNotepad(QMainWindow):
         group_menu.addAction(self.__zoomResetAction)
 
         viewmenu.addAction(self.__statusBarAction)
+        viewmenu.addAction(self.__lineNumberAction)
+        viewmenu.addAction(self.__fullScreenAction)
 
         menubar.addMenu(filemenu)
         menubar.addMenu(editmenu)
@@ -296,6 +329,7 @@ class DarkNotepad(QMainWindow):
             font = dialog.getFont()
             self.__textEdit.setFont(font)
             self.__fontLabel.setText(self.__fontLabelText.format(font.family(), font.pointSize()))
+            self.__lineNumberWidget.setFontPointSize(font.pointSizeF())
 
     def __setColor(self):
         color = self.__textEdit.textColor()
@@ -316,7 +350,6 @@ class DarkNotepad(QMainWindow):
 
             # Set text color of textedit in general
             self.__textEdit.setTextColor(color)
-
             self.__colorLabel.setText(self.__colorLabelText.format(color.name()))
 
     def __zoomByWheel(self, n):
@@ -336,6 +369,13 @@ class DarkNotepad(QMainWindow):
         self.__textEdit.zoomInit()
         self.__zoomScaleLabel.setText(self.__zoomScaleText.format(100))
 
+    def __fullScreenToggled(self, f: bool):
+        if f:
+            self.showFullScreen()
+        else:
+            self.showNormal()
+        self.__fullScreenAction.setChecked(f)
+
     def closeEvent(self, e):
         if self.__changed_flag:
             reply = self.__execWouldYouSaveMessageBox()
@@ -352,6 +392,13 @@ class DarkNotepad(QMainWindow):
         noRecentFilesTextAction = QAction('No recent files', self)
         noRecentFilesTextAction.setEnabled(False)
         self.__openRecentMenu.addAction(noRecentFilesTextAction)
+
+    def keyPressEvent(self, e):
+        if e.key() == Qt.Key_F11:
+            self.__fullScreenToggled(not self.isFullScreen())
+        if e.key() == Qt.Key_Escape:
+            self.__fullScreenToggled(False)
+        return super().keyPressEvent(e)
 
 
 if __name__ == "__main__":
