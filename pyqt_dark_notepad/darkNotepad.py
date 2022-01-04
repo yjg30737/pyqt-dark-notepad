@@ -24,6 +24,7 @@ class DarkNotepad(QMainWindow):
         self.__new_text = ''
         self.__changed_flag = False
         self.__current_text_color = QColor(255, 255, 255)
+        self.__menubar_visible = True
         self.__initUi()
 
     def __initUi(self):
@@ -43,6 +44,10 @@ class DarkNotepad(QMainWindow):
         self.__findReplaceWidget = FindReplaceTextWidget(self.__textEdit)
         # Hide in default (make it show to use find feature)
         self.__findReplaceWidget.setVisible(False)
+        self.__findReplaceWidget.setMouseTracking(True)
+        self.__findReplaceWidget.mouseMoveEvent = self.mouseMoveEvent
+        self.__findReplaceWidget.closeSignal.connect(self.__findReplaceWidgetClosed)
+        self.__findReplaceWidget.layout().setContentsMargins(0, 2, 0, 2)
 
         lay = QVBoxLayout()
         lay.addWidget(self.__findReplaceWidget)
@@ -237,12 +242,20 @@ class DarkNotepad(QMainWindow):
     def __showMenu(self):
         self.__menuAnimation.setDirection(QAbstractAnimation.Backward)
         self.__menuAnimation.start()
-        self.__textEdit.setCursorOnTopEvent(False)
+        if self.__findReplaceWidget.isVisible():
+            pass
+        else:
+            self.__textEdit.setCursorOnTopEvent(False)
+        self.__menubar_visible = True
 
     def __closeMenu(self):
         self.__menuAnimation.setDirection(QAbstractAnimation.Forward)
         self.__menuAnimation.start()
-        self.__textEdit.setCursorOnTopEvent(True)
+        if self.__findReplaceWidget.isVisible():
+            pass
+        else:
+            self.__textEdit.setCursorOnTopEvent(True)
+        self.__menubar_visible = False
 
     def __renewRcInfoInStatusBar(self):
         cur = self.__textEdit.textCursor()
@@ -344,11 +357,16 @@ class DarkNotepad(QMainWindow):
         self.__findReplaceWidget.setVisible(True)
         self.__findReplaceWidget.setOnlyFindTextWidget(True)
         self.__findReplaceWidget.setFocus()
+        self.__textEdit.setCursorOnTopEvent(False)
 
     def __replace(self):
         self.__findReplaceWidget.setVisible(True)
         self.__findReplaceWidget.setOnlyFindTextWidget(False)
         self.__findReplaceWidget.setFocus()
+        self.__textEdit.setCursorOnTopEvent(False)
+
+    def __findReplaceWidgetClosed(self):
+        self.__textEdit.setCursorOnTopEvent(not self.__menubar_visible)
 
     def __setFont(self):
         font = self.__textEdit.font()
@@ -429,6 +447,13 @@ class DarkNotepad(QMainWindow):
         if e.key() == Qt.Key_Escape:
             self.__fullScreenToggled(False)
         return super().keyPressEvent(e)
+
+    def mouseMoveEvent(self, e):
+        p = e.pos()
+        y = p.y()
+        if y < 2 and self.__findReplaceWidget.isVisible() and not self.__menubar_visible:
+            self.__showMenu()
+        return super().mouseMoveEvent(e)
 
 
 if __name__ == "__main__":
