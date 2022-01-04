@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QTextEdit, QApplication
 class DarkNotepadTextEdit(QTextEdit):
     fileDropped = pyqtSignal(str)
     zoomSignal = pyqtSignal(int)
+    cursorOnTop = pyqtSignal()
 
     def __init__(self):
         super().__init__()
@@ -14,6 +15,8 @@ class DarkNotepadTextEdit(QTextEdit):
         self.__step = 10
         self.__init = 100
         self.setAcceptDrops(True)
+        self.setMouseTracking(True)
+        self.__cursorOnTopEvent = False
 
     def dragEnterEvent(self, e):
         super().dragEnterEvent(e)
@@ -82,3 +85,14 @@ class DarkNotepadTextEdit(QTextEdit):
 
     def getScale(self):
         return self.__scale
+
+    def setCursorOnTopEvent(self, f: bool):
+        self.__cursorOnTopEvent = f
+
+    def mouseMoveEvent(self, e):
+        p = e.pos()
+        y = p.y()
+        if self.__cursorOnTopEvent:
+            if y < 2:
+                self.cursorOnTop.emit()
+        return super().mouseMoveEvent(e)

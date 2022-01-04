@@ -1,10 +1,10 @@
 import os.path
 
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QPropertyAnimation, QAbstractAnimation
 
 from PyQt5.QtGui import QTextCursor, QColor
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMenuBar, QMenu, QAction, QFileDialog, qApp, QDialog, \
-    QWidget, QVBoxLayout, QMessageBox, QLabel, QHBoxLayout
+    QWidget, QVBoxLayout, QMessageBox, QLabel, QHBoxLayout, QPushButton, QGridLayout
 from pyqt_color_dialog import ColorPickerDialog
 from pyqt_find_replace_text_widget import FindReplaceTextWidget
 from pyqt_font_dialog import FontDialog
@@ -37,6 +37,7 @@ class DarkNotepad(QMainWindow):
         self.__textEdit.cursorPositionChanged.connect(self.__renewRcInfoInStatusBar)
         self.__textEdit.fileDropped.connect(self.__execOpen)
         self.__textEdit.zoomSignal.connect(self.__zoomByWheel)
+        self.__textEdit.cursorOnTop.connect(self.__showMenu)
 
         # Declare find widget in advance
         self.__findReplaceWidget = FindReplaceTextWidget(self.__textEdit)
@@ -73,6 +74,8 @@ class DarkNotepad(QMainWindow):
 
         # Set the text color independently
         self.__textEdit.setTextColor(self.__current_text_color)
+
+        self.setMouseTracking(True)
 
     # todo make line widget successfully interact with zoom in, out, backspace in the middle of text widget
     def __lineWidgetLineCountChanged(self):
@@ -143,7 +146,7 @@ class DarkNotepad(QMainWindow):
         self.__fullScreenAction.toggled.connect(self.__fullScreenToggled)
 
     def __setMenuBar(self):
-        menubar = QMenuBar()
+        self.__menubar = QMenuBar()
 
         filemenu = QMenu('File', self)
         filemenu.addAction(self.__newAction)
@@ -175,12 +178,29 @@ class DarkNotepad(QMainWindow):
         viewmenu.addAction(self.__lineNumberAction)
         viewmenu.addAction(self.__fullScreenAction)
 
-        menubar.addMenu(filemenu)
-        menubar.addMenu(editmenu)
-        menubar.addMenu(formatmenu)
-        menubar.addMenu(viewmenu)
+        self.__menubar.addMenu(filemenu)
+        self.__menubar.addMenu(editmenu)
+        self.__menubar.addMenu(formatmenu)
+        self.__menubar.addMenu(viewmenu)
 
-        self.setMenuBar(menubar)
+        self.__showToggleBtn = QPushButton()
+        self.__showToggleBtn.clicked.connect(self.__closeMenu)
+
+        PyQtResourceHelper.setIcon([self.__showToggleBtn], ['ico/close.png'])
+        PyQtResourceHelper.setStyleSheet([self.__showToggleBtn], ['style/icon_button.css'])
+
+        self.__menubar.setCornerWidget(self.__showToggleBtn)
+
+        self.__textEdit.setCursorOnTopEvent(False)
+
+        self.setMenuBar(self.__menubar)
+
+        self.__menuAnimation = QPropertyAnimation(self, b"height")
+        self.__menuAnimation.valueChanged.connect(self.__menubar.setFixedHeight)
+
+        self.__menuAnimation.setStartValue(self.__menubar.sizeHint().height())
+        self.__menuAnimation.setDuration(200) # default duration
+        self.__menuAnimation.setEndValue(0) # default end value
 
     def __setStatusBar(self):
         self.__statusBar = self.statusBar()
@@ -213,6 +233,16 @@ class DarkNotepad(QMainWindow):
         self.__statusBar.addPermanentWidget(self.__charsLinesCountLabel)
         self.__renewRcInfoInStatusBar()
         self.__renewCharsLinesCountInStatusBar()
+
+    def __showMenu(self):
+        self.__menuAnimation.setDirection(QAbstractAnimation.Backward)
+        self.__menuAnimation.start()
+        self.__textEdit.setCursorOnTopEvent(False)
+
+    def __closeMenu(self):
+        self.__menuAnimation.setDirection(QAbstractAnimation.Forward)
+        self.__menuAnimation.start()
+        self.__textEdit.setCursorOnTopEvent(True)
 
     def __renewRcInfoInStatusBar(self):
         cur = self.__textEdit.textCursor()
