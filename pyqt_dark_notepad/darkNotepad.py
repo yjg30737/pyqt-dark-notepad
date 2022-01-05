@@ -4,7 +4,7 @@ from PyQt5.QtCore import Qt, QPropertyAnimation, QAbstractAnimation
 
 from PyQt5.QtGui import QTextCursor, QColor
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMenuBar, QMenu, QAction, QFileDialog, qApp, QDialog, \
-    QWidget, QVBoxLayout, QMessageBox, QLabel, QHBoxLayout, QPushButton, QGridLayout
+    QWidget, QVBoxLayout, QMessageBox, QLabel, QHBoxLayout, QPushButton, QSlider, QFrame
 from pyqt_color_dialog import ColorPickerDialog
 from pyqt_find_replace_text_widget import FindReplaceTextWidget
 from pyqt_font_dialog import FontDialog
@@ -211,10 +211,32 @@ class DarkNotepad(QMainWindow):
         self.__statusBar = self.statusBar()
         self.__statusBar.setVisible(True)
         self.__statusBar.setSizeGripEnabled(False)
-        
+
         self.__zoomScaleText = '{0}%'
+
+        text = self.__zoomScaleText.format(self.__textEdit.getScale())
         self.__zoomScaleLabel = QLabel()
-        self.__zoomScaleLabel.setText(self.__zoomScaleText.format(self.__textEdit.getScale()))
+        self.__zoomScaleLabel.setText(text)
+        self.__zoomScaleLabel.setMaximumWidth(self.__zoomScaleLabel.fontMetrics().boundingRect(text).width()+5)
+
+        self.__zoomScaleSlider = QSlider()
+        self.__zoomScaleSlider.setOrientation(Qt.Horizontal)
+        self.__zoomScaleSlider.setMaximumWidth(100)
+        self.__zoomScaleSlider.setRange(10, 400)
+        self.__zoomScaleSlider.setValue(self.__textEdit.getScale())
+        self.__zoomScaleSlider.valueChanged.connect(self.__zoomScaleSliderValueChanged)
+
+        self.__zoomScaleSlider.setTickInterval(10)
+        self.__zoomScaleSlider.setSingleStep(10)
+
+        lay = QHBoxLayout()
+        lay.setAlignment(Qt.AlignRight)
+        lay.addWidget(self.__zoomScaleLabel)
+        lay.addWidget(self.__zoomScaleSlider)
+        lay.setContentsMargins(0, 0, 0, 0)
+
+        self.__zoomScaleWidget = QWidget()
+        self.__zoomScaleWidget.setLayout(lay)
 
         self.__fontLabelText = '{0}, {1}pt'
         self.__fontLabel = QLabel()
@@ -231,7 +253,7 @@ class DarkNotepad(QMainWindow):
         self.__charsLinesCountText = '{0} chars, {1} lines'
         self.__charsLinesCountLabel = QLabel()
 
-        self.__statusBar.addPermanentWidget(self.__zoomScaleLabel)
+        self.__statusBar.addPermanentWidget(self.__zoomScaleWidget)
         self.__statusBar.addPermanentWidget(self.__colorLabel)
         self.__statusBar.addPermanentWidget(self.__fontLabel)
         self.__statusBar.addPermanentWidget(self.__rcLabel)
@@ -404,18 +426,29 @@ class DarkNotepad(QMainWindow):
         self.__zoomScaleLabel.setText(self.__zoomScaleText.format(n))
         self.__zoomInAction.setEnabled(n < 400)
         self.__zoomOutAction.setEnabled(n > 10)
+        self.__zoomScaleSlider.setValue(n)
 
     def __zoomIn(self):
         self.__textEdit.zoomIn(10)
         self.__zoomScaleLabel.setText(self.__zoomScaleText.format(self.__textEdit.getScale()))
+        self.__zoomScaleSlider.setValue(self.__textEdit.getScale())
 
     def __zoomOut(self):
         self.__textEdit.zoomOut(10)
         self.__zoomScaleLabel.setText(self.__zoomScaleText.format(self.__textEdit.getScale()))
+        self.__zoomScaleSlider.setValue(self.__textEdit.getScale())
 
     def __zoomReset(self):
         self.__textEdit.zoomInit()
         self.__zoomScaleLabel.setText(self.__zoomScaleText.format(100))
+        self.__zoomScaleSlider.setValue(self.__textEdit.getScale())
+
+    def __zoomScaleSliderValueChanged(self, v):
+        v = v - v % 10
+        self.__textEdit.setScale(v)
+        text = self.__zoomScaleText.format(self.__textEdit.getScale())
+        self.__zoomScaleLabel.setText(text)
+        self.__zoomScaleLabel.setMaximumWidth(self.__zoomScaleLabel.fontMetrics().boundingRect(text).width()+5)
 
     def __fullScreenToggled(self, f: bool):
         if f:
