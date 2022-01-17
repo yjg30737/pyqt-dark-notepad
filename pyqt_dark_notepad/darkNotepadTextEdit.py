@@ -1,11 +1,12 @@
 from PyQt5.QtCore import pyqtSignal, Qt
-from PyQt5.QtWidgets import QTextEdit, QApplication
+from PyQt5.QtWidgets import QTextEdit, QApplication, QAction
 
 
 class DarkNotepadTextEdit(QTextEdit):
     fileDropped = pyqtSignal(str)
     zoomSignal = pyqtSignal(int)
     cursorOnTop = pyqtSignal()
+    showInExplorer = pyqtSignal()
 
     def __init__(self):
         super().__init__()
@@ -17,6 +18,22 @@ class DarkNotepadTextEdit(QTextEdit):
         self.setAcceptDrops(True)
         self.setMouseTracking(True)
         self.__cursorOnTopEvent = False
+        self.__initUi()
+
+    def __initUi(self):
+        self.__showInExplorerAction = QAction('Show In Explorer')
+        self.__showInExplorerAction.triggered.connect(self.showInExplorer)
+        self.__showInExplorerAction.setEnabled(False)
+
+        self.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.customContextMenuRequested.connect(self.__prepare_menu)
+
+    def __prepare_menu(self, pos):
+        menu = self.createStandardContextMenu()
+        menu.addSeparator()
+
+        menu.addAction(self.__showInExplorerAction)
+        menu.exec(self.mapToGlobal(pos))
 
     def dragEnterEvent(self, e):
         super().dragEnterEvent(e)
@@ -105,3 +122,9 @@ class DarkNotepadTextEdit(QTextEdit):
             if y < 2:
                 self.cursorOnTop.emit()
         return super().mouseMoveEvent(e)
+
+    def setFilename(self, filename):
+        self.__filename = filename
+        contents = filename.read()
+        self.setText(contents)
+        self.__showInExplorerAction.setEnabled(True)

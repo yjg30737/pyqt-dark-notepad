@@ -1,4 +1,5 @@
 import os.path
+import subprocess
 
 from PyQt5.QtCore import Qt, QPropertyAnimation, QAbstractAnimation
 
@@ -19,7 +20,8 @@ from pyqt_resource_helper.pyqtResourceHelper import PyQtResourceHelper
 class DarkNotepad(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.__cur_filename = 'Untitled'
+        self.__default_filename = 'Untitled'
+        self.__cur_filename = self.__default_filename
         self.__old_text = ''
         self.__new_text = ''
         self.__changed_flag = False
@@ -39,6 +41,7 @@ class DarkNotepad(QMainWindow):
         self.__textEdit.fileDropped.connect(self.__execOpen)
         self.__textEdit.zoomSignal.connect(self.__zoomByWheel)
         self.__textEdit.cursorOnTop.connect(self.__showMenu)
+        self.__textEdit.showInExplorer.connect(self.__showInExplorer)
 
         # Declare find widget in advance
         self.__findReplaceWidget = FindReplaceTextWidget(self.__textEdit)
@@ -105,6 +108,10 @@ class DarkNotepad(QMainWindow):
         self.__saveAsAction.setShortcut('Ctrl+Shift+S')
         self.__saveAsAction.triggered.connect(self.__saveAs)
 
+        self.__showInExplorerAction = QAction('Show In Explorer')
+        self.__showInExplorerAction.triggered.connect(self.__showInExplorer)
+        self.__showInExplorerAction.setEnabled(False)
+
         self.__quitAction = QAction('Exit', self)
         self.__quitAction.triggered.connect(qApp.quit)
 
@@ -125,26 +132,26 @@ class DarkNotepad(QMainWindow):
         self.__colorAction.triggered.connect(self.__setColor)
 
         # viewmenu actions
-        self.__zoomInAction = QAction('Zoom in')
+        self.__zoomInAction = QAction('Zoom In')
         self.__zoomInAction.triggered.connect(self.__zoomIn)
 
-        self.__zoomOutAction = QAction('Zoom out')
+        self.__zoomOutAction = QAction('Zoom Out')
         self.__zoomOutAction.triggered.connect(self.__zoomOut)
 
         self.__zoomResetAction = QAction('Reset')
         self.__zoomResetAction.triggered.connect(self.__zoomReset)
 
-        self.__statusBarAction = QAction("Show status bar", self)
+        self.__statusBarAction = QAction("Show Status Bar", self)
         self.__statusBarAction.setCheckable(True)
         self.__statusBarAction.setChecked(True)
         self.__statusBarAction.toggled.connect(self.__statusBar.setVisible)
 
-        self.__lineNumberAction = QAction("Show line numbers", self)
+        self.__lineNumberAction = QAction("Show Line Numbers", self)
         self.__lineNumberAction.setCheckable(True)
         self.__lineNumberAction.setChecked(False)
         self.__lineNumberAction.toggled.connect(self.__lineNumberWidget.setVisible)
 
-        self.__fullScreenAction = QAction("Show as full screen", self)
+        self.__fullScreenAction = QAction("Show As Full Screen", self)
         self.__fullScreenAction.setShortcut('F11')
         self.__fullScreenAction.setCheckable(True)
         self.__fullScreenAction.setChecked(False)
@@ -160,6 +167,8 @@ class DarkNotepad(QMainWindow):
         filemenu.addAction(self.__saveAsAction)
         self.__openRecentMenu = filemenu.addMenu('Open Recent')
         self.__initOpenRecentFilesActionMenu()
+        filemenu.addSeparator()
+        filemenu.addAction(self.__showInExplorerAction)
         filemenu.addSeparator()
         filemenu.addAction(self.__quitAction)
 
@@ -322,6 +331,7 @@ class DarkNotepad(QMainWindow):
     def __execOpen(self, filename):
         self.__setFileContent(filename)
         self.__setTitle(filename)
+        self.__showInExplorerAction.setEnabled(True)
         self.__changed_flag = False
 
     def __setFileContent(self, filename):
@@ -337,7 +347,7 @@ class DarkNotepad(QMainWindow):
 
     def __setText(self, filename):
         contents = filename.read()
-        self.__textEdit.setText(contents)
+        self.__textEdit.setFilename(filename)
         self.__old_text = contents
 
     def __setTitle(self, filename):
@@ -352,6 +362,14 @@ class DarkNotepad(QMainWindow):
 
     def __saveAs(self):
         self.__execSaveDialog()
+
+    def __showInExplorer(self):
+        filename = self.__cur_filename.strip()
+        if filename == self.__default_filename:
+            pass
+        else:
+            path = filename.replace('/', '\\')
+            subprocess.Popen(r'explorer /select,"' + path + '"')
 
     def __execSaveDialog(self):
         dirname = os.path.dirname(self.__cur_filename)
