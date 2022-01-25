@@ -199,6 +199,7 @@ class DarkNotepad(QMainWindow):
 
         self.__showToggleBtn = QPushButton()
         self.__showToggleBtn.clicked.connect(self.__closeMenu)
+        self.__showToggleBtn.setToolTip('Hide the menu bar')
 
         PyQtResourceHelper.setIcon([self.__showToggleBtn], ['ico/close.png'])
         PyQtResourceHelper.setStyleSheet([self.__showToggleBtn], ['style/icon_button.css'])
@@ -505,6 +506,10 @@ class DarkNotepad(QMainWindow):
         if y < 2 and self.__findReplaceWidget.isVisible() and not self.__menubar_visible:
             self.__showMenu()
         return super().mouseMoveEvent(e)
+
+    def event(self, e):
+        print(e.type())
+        return super().event(e)
 
 
 if __name__ == "__main__":
