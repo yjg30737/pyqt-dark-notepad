@@ -348,7 +348,7 @@ class DarkNotepad(QMainWindow):
 
     def __setText(self, filename):
         contents = filename.read()
-        self.__textEdit.setFilename(filename)
+        self.__textEdit.setFileContents(filename, contents)
         self.__old_text = contents
 
     def __setTitle(self, filename):
@@ -506,10 +506,6 @@ class DarkNotepad(QMainWindow):
         if y < 2 and self.__findReplaceWidget.isVisible() and not self.__menubar_visible:
             self.__showMenu()
         return super().mouseMoveEvent(e)
-
-    def event(self, e):
-        print(e.type())
-        return super().event(e)
 
 
 if __name__ == "__main__":

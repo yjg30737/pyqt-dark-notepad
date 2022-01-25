@@ -123,8 +123,7 @@ class DarkNotepadTextEdit(QTextEdit):
                 self.cursorOnTop.emit()
         return super().mouseMoveEvent(e)
 
-    def setFilename(self, filename):
+    def setFileContents(self, filename, contents):
         self.__filename = filename
-        contents = filename.read()
         self.setText(contents)
         self.__showInExplorerAction.setEnabled(True)
