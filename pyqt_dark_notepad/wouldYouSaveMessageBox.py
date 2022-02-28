@@ -6,4 +6,3 @@ from pyqt_resource_helper import PyQtResourceHelper
 class WouldYouSaveMessageBox(QMessageBox):
     def __init__(self):
         super().__init__()
-        PyQtResourceHelper.setStyleSheet([self], ['style/no_icon_button.css'])

@@ -78,8 +78,6 @@ class DarkNotepad(QMainWindow):
         self.__setActions()
         self.__setMenuBar()
 
-        PyQtResourceHelper.setStyleSheet([self], ['style/dark_gray_theme.css'])
-
         # Set the text color independently
         self.__textEdit.setTextColor(self.__current_text_color)
 
@@ -202,7 +200,6 @@ class DarkNotepad(QMainWindow):
         self.__showToggleBtn.setToolTip('Hide the menu bar')
 
         PyQtResourceHelper.setIcon([self.__showToggleBtn], ['ico/close.png'])
-        PyQtResourceHelper.setStyleSheet([self.__showToggleBtn], ['style/icon_button.css'])
 
         self.__menubar.setCornerWidget(self.__showToggleBtn)
 
