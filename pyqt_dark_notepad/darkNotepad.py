@@ -506,3 +506,12 @@ class DarkNotepad(QMainWindow):
         if y < 2 and self.__findReplaceWidget.isVisible() and not self.__menubar_visible:
             self.__showMenu()
         return super().mouseMoveEvent(e)
+
+
+if __name__ == "__main__":
+    import sys
+
+    app = QApplication(sys.argv)
+    darkNotepad = DarkNotepad()
+    darkNotepad.show()
+    sys.exit(app.exec_())
