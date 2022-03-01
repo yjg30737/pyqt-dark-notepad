@@ -40,7 +40,7 @@ if __name__ == "__main__":
 ```
 
 ## Preview
-![image](https://user-images.githubusercontent.com/55078043/148221856-1bfec82a-d17b-4a52-9843-6ccaf1b6d187.png)
+![image](https://user-images.githubusercontent.com/55078043/156080318-f880a636-2190-4238-aa3c-02e662730451.png)
 
 ## Note
 Line edit widget doesn't properly work after user zoom in/out the widget or resize the font.
