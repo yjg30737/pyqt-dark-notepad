@@ -31,3 +31,4 @@ class DarkNotepadApp(QApplication):
         caller_path = os.path.dirname(inspect.getframeinfo(sys._getframe(1)).filename)
         self.__titleBarWindow.setTopTitleBar(icon_filename=os.path.join(caller_path, 'ico\\dark-notepad.svg'))
         self.__titleBarWindow.setButtons()
+        self.__titleBarWindow.show()
