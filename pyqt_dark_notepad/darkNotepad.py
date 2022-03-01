@@ -201,6 +201,9 @@ class DarkNotepad(QMainWindow):
 
         PyQtResourceHelper.setIcon([self.__showToggleBtn], ['ico/close.png'])
 
+        # prevent the menu height from being set to corner widget size which make menu bar look awkward
+        height = self.__menubar.sizeHint().height()
+
         self.__menubar.setCornerWidget(self.__showToggleBtn)
 
         self.__textEdit.setCursorOnTopEvent(False)
@@ -210,7 +213,7 @@ class DarkNotepad(QMainWindow):
         self.__menuAnimation = QPropertyAnimation(self, b"height")
         self.__menuAnimation.valueChanged.connect(self.__menubar.setFixedHeight)
 
-        self.__menuAnimation.setStartValue(self.__menubar.sizeHint().height())
+        self.__menuAnimation.setStartValue(height)
         self.__menuAnimation.setDuration(200) # default duration
         self.__menuAnimation.setEndValue(0) # default end value
 
