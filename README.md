@@ -1,6 +1,11 @@
 # pyqt-dark-notepad
 PyQt Dark Notepad
 
+## Note
+Line edit widget doesn't properly work after user zoom in/out the widget or resize the font.
+
+I'm working on new feature(It doesn't work properly).
+
 ## Requirements
 * PyQt5 >= 5.15
 
@@ -41,6 +46,3 @@ if __name__ == "__main__":
 
 ## Preview
 ![image](https://user-images.githubusercontent.com/55078043/156080318-f880a636-2190-4238-aa3c-02e662730451.png)
-
-## Note
-Line edit widget doesn't properly work after user zoom in/out the widget or resize the font.
