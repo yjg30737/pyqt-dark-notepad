@@ -2,7 +2,7 @@
 PyQt Dark Notepad
 
 ## Requirements
-* PyQt5 >= 5.8
+* PyQt5 >= 5.15
 
 ## Included pacakges
 * <a href="https://github.com/yjg30737/pyqt-dark-gray-theme.git">pyqt-dark-gray-theme</a>
@@ -29,15 +29,14 @@ PyQt Dark Notepad
 
 ## Code Example
 ```python
-import sys
-from PyQt5.QtWidgets import QApplication
-from pyqt_dark_notepad import DarkNotepad
+from pyqt_dark_notepad.darkNotepadApp import DarkNotepadApp
+
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    darkNotepad = DarkNotepad()
-    darkNotepad.show()
-    sys.exit(app.exec_())
+    import sys
+
+    app = DarkNotepadApp(sys.argv)
+    app.exec_()
 ```
 
 ## Preview
