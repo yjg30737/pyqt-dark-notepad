@@ -20,6 +20,6 @@ class DarkNotepadApp(QApplication):
         menu_bar_style = getMenuBarStyle(menu_bar)
         menu_bar.setStyleSheet(menu_bar_style)
         self.__window = CustomTitlebarWindow(ex)
-        self.__window.setTopTitleBar()
+        self.__window.setTopTitleBar(icon_filename='dark-notepad.svg')
         self.__window.setButtons()
         self.__window.show()
