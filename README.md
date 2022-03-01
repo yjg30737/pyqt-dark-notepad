@@ -44,5 +44,3 @@ if __name__ == "__main__":
 
 ## Note
 Line edit widget doesn't properly work after user zoom in/out the widget or resize the font.
-
-I will clean my code soon. 
