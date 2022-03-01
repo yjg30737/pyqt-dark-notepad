@@ -10,10 +10,8 @@ class DarkNotepadApp(QApplication):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         mainWindow = DarkNotepad()
-        self.__titleBarWindow = ''
         self.__setWindowStyle(mainWindow)
         self.__setCustomTitleBar(mainWindow)
-        self.__titleBarWindow.show()
 
     def __setWindowStyle(self, main_window):
         main_window.setStyleSheet(getThemeStyle())  # theme
