@@ -17,7 +17,7 @@ setup(
         'pyqt-find-replace-text-widget @ git+https://git@github.com/yjg30737/pyqt-find-replace-text-widget.git@main',
         'pyqt-font-dialog @ git+https://git@github.com/yjg30737/pyqt-font-dialog.git@main',
         'pyqt-color-dialog @ git+https://git@github.com/yjg30737/pyqt-color-dialog.git@main',
-        'pyqt-line-number-widget @ git+https://git@github.com/yjg30737/pyqt-line-number-widget.git',
-        'pyqt-svg-icon-pushbutton @ git+https://git@github.com/yjg30737/pyqt-svg-icon-pushbutton.git'
+        'pyqt-line-number-widget @ git+https://git@github.com/yjg30737/pyqt-line-number-widget.git@main',
+        'pyqt-svg-icon-pushbutton @ git+https://git@github.com/yjg30737/pyqt-svg-icon-pushbutton.git@main'
     ]
 )
