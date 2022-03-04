@@ -14,7 +14,8 @@ from pyqt_dark_notepad.darkNotepadTextEdit import DarkNotepadTextEdit
 from pyqt_dark_notepad.wouldYouSaveMessageBox import WouldYouSaveMessageBox
 
 from pyqt_line_number_widget.lineNumberWidget import LineNumberWidget
-from pyqt_resource_helper.pyqtResourceHelper import PyQtResourceHelper
+from pyqt_svg_icon_pushbutton import SvgIconPushButton
+
 
 
 class DarkNotepad(QMainWindow):
@@ -195,11 +196,10 @@ class DarkNotepad(QMainWindow):
         self.__menubar.addMenu(formatmenu)
         self.__menubar.addMenu(viewmenu)
 
-        self.__showToggleBtn = QPushButton()
+        self.__showToggleBtn = SvgIconPushButton()
         self.__showToggleBtn.clicked.connect(self.__closeMenu)
         self.__showToggleBtn.setToolTip('Hide the menu bar')
-
-        PyQtResourceHelper.setIcon([self.__showToggleBtn], ['ico/close.png'])
+        self.__showToggleBtn.setIcon('ico/close.svg')
 
         # prevent the menu height from being set to corner widget size which make menu bar look awkward
         height = self.__menubar.sizeHint().height()

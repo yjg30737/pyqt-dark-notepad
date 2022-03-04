@@ -7,7 +7,7 @@ setup(
     author_email='yjg30737@gmail.com',
     license='MIT',
     packages=find_packages(),
-    package_data={'pyqt_dark_notepad.ico': ['close.png', 'dark-notepad.svg']},
+    package_data={'pyqt_dark_notepad.ico': ['close.svg', 'dark-notepad.svg']},
     description='PyQt5 Dark Notepad',
     url='https://github.com/yjg30737/pyqt-dark-notepad.git',
     install_requires=[
@@ -17,6 +17,7 @@ setup(
         'pyqt-find-replace-text-widget @ git+https://git@github.com/yjg30737/pyqt-find-replace-text-widget.git@main',
         'pyqt-font-dialog @ git+https://git@github.com/yjg30737/pyqt-font-dialog.git@main',
         'pyqt-color-dialog @ git+https://git@github.com/yjg30737/pyqt-color-dialog.git@main',
-        'pyqt-line-number-widget @ git+https://git@github.com/yjg30737/pyqt-line-number-widget.git'
+        'pyqt-line-number-widget @ git+https://git@github.com/yjg30737/pyqt-line-number-widget.git',
+        'pyqt-svg-icon-pushbutton @ git+https://git@github.com/yjg30737/pyqt-svg-icon-pushbutton.git'
     ]
 )
