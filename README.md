@@ -16,7 +16,7 @@ I'm working on "new" feature(It doesn't work properly).
 * <a href="https://github.com/yjg30737/pyqt-font-dialog.git">pyqt-font-dialog</a>
 * <a href="https://github.com/yjg30737/pyqt-color-dialog.git">pyqt-color-dialog</a>
 * <a href="https://github.com/yjg30737/pyqt-line-number-widget.git">pyqt-line-number-widget</a>
-* <a href="https://github.com/yjg30737/pyqt-svg-icon-pushbutton.git">pyqt-svg-icon-pushbutton</a> - For button supports svg icon
+* <a href="https://github.com/yjg30737/pyqt-svg-icon-pushbutton.git">pyqt-svg-icon-pushbutton</a> - For making button support svg icon
 
 ## Setup
 ```pip3 install git+https://github.com/yjg30737/pyqt-dark-notepad.git --upgrade```
