@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pyqt-dark-notepad',
-    version='1.2.0',
+    version='1.3.0',
     author='Jung Gyu Yoon',
     author_email='yjg30737@gmail.com',
     license='MIT',
