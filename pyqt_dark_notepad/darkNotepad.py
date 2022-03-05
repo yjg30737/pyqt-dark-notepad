@@ -196,7 +196,7 @@ class DarkNotepad(QMainWindow):
         self.__menubar.addMenu(formatmenu)
         self.__menubar.addMenu(viewmenu)
 
-        self.__showToggleBtn = SvgIconPushButton()
+        self.__showToggleBtn = SvgIconPushButton(self.__menubar)
         self.__showToggleBtn.clicked.connect(self.__closeMenu)
         self.__showToggleBtn.setToolTip('Hide the menu bar')
         self.__showToggleBtn.setIcon('ico/close.svg')
