@@ -418,7 +418,7 @@ class DarkNotepad(QMainWindow):
             font = dialog.getFont()
             self.__textEdit.setFont(font)
             self.__fontLabel.setText(self.__fontLabelText.format(font.family(), font.pointSize()))
-            self.__lineNumberWidget.setFontPointSize(font.pointSizeF())
+            self.__lineNumberWidget.setFontSize(font.pointSizeF())
 
     def __setColor(self):
         color = self.__textEdit.textColor()
