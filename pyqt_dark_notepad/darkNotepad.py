@@ -1,7 +1,7 @@
 import os.path
 import subprocess
 
-from PyQt5.QtCore import Qt, QPropertyAnimation, QAbstractAnimation
+from PyQt5.QtCore import Qt, QPropertyAnimation, QAbstractAnimation, pyqtSignal
 
 from PyQt5.QtGui import QTextCursor, QColor
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMenuBar, QMenu, QAction, QFileDialog, qApp, QDialog, \
@@ -17,8 +17,9 @@ from pyqt_line_number_widget.lineNumberWidget import LineNumberWidget
 from pyqt_svg_icon_pushbutton import SvgIconPushButton
 
 
-
 class DarkNotepad(QMainWindow):
+    newClicked = pyqtSignal()
+
     def __init__(self):
         super().__init__()
         self.__default_filename = 'Untitled'
@@ -303,8 +304,7 @@ class DarkNotepad(QMainWindow):
         self.__changed_flag = not self.__old_text == self.__new_text
 
     def __new(self):
-        self.__new_window = DarkNotepad()
-        self.__new_window.show()
+        self.newClicked.emit()
 
     def __execWouldYouSaveMessageBox(self):
         saveMsgBox = WouldYouSaveMessageBox()
