@@ -1,5 +1,6 @@
 git+https://git@github.com/yjg30737/pyqt-style-setter.git@main
 git+https://git@github.com/yjg30737/pyqt-custom-titlebar-setter.git@main
+git+https://git@github.com/yjg30737/pyqt-custom-titlebar-window.git@main
 git+https://git@github.com/yjg30737/pyqt-find-replace-text-widget.git@main
 git+https://git@github.com/yjg30737/pyqt-font-dialog.git@main
 git+https://git@github.com/yjg30737/pyqt-color-dialog.git@main
