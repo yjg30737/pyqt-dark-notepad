@@ -39,5 +39,8 @@ class DarkNotepadApp(QApplication):
                     elif reply == QMessageBox.Cancel:
                         e.ignore()
                         return True
-
+                else:
+                    w = self.__windowDict.get(obj, 0)
+                    if w:
+                        self.__windowDict.pop(obj)
         return super().eventFilter(obj, e)
