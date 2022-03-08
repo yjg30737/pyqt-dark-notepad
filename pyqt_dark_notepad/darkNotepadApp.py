@@ -20,12 +20,13 @@ class DarkNotepadApp(QApplication):
         StyleSetter.setWindowStyle(mainWindow)
         titleBarWindow = CustomTitlebarSetter.getCustomTitleBar(mainWindow, icon_filename='ico/dark-notepad.svg')
         titleBarWindow.setAttribute(Qt.WA_DeleteOnClose)
+        titleBarWindow.destroyed.connect(self.__destroyed)
         titleBarWindow.show()
 
     def eventFilter(self, obj, e):
         if isinstance(obj, CustomTitlebarWindow):
             if e.type() == 17:
-                self.__windowDict[obj] = obj.winId()
+                self.__windowDict[obj] = int(obj.winId())
             elif e.type() == 19:
                 currentWidget = obj.getInnerWidget()
                 if currentWidget.isChanged():
@@ -33,14 +34,18 @@ class DarkNotepadApp(QApplication):
                     if reply == QMessageBox.Yes or reply == QMessageBox.No:
                         if reply == QMessageBox.Yes:
                             currentWidget.save()
-                        w = self.__windowDict.get(obj, 0)
-                        if w:
-                            self.__windowDict.pop(obj)
                     elif reply == QMessageBox.Cancel:
                         e.ignore()
                         return True
                 else:
-                    w = self.__windowDict.get(obj, 0)
-                    if w:
-                        self.__windowDict.pop(obj)
+                    pass
         return super().eventFilter(obj, e)
+
+    def __destroyed(self, w):
+        for k, v in self.__windowDict.items():
+            if w.winId():
+                if v == int(w.winId()):
+                    self.__windowDict.pop(k)
+                    break
+            else:
+                break
