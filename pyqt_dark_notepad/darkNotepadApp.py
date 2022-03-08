@@ -1,3 +1,4 @@
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QMessageBox
 from pyqt_dark_notepad import DarkNotepad
 
@@ -18,6 +19,7 @@ class DarkNotepadApp(QApplication):
         mainWindow.newClicked.connect(self.__new)
         StyleSetter.setWindowStyle(mainWindow)
         titleBarWindow = CustomTitlebarSetter.getCustomTitleBar(mainWindow, icon_filename='ico/dark-notepad.svg')
+        titleBarWindow.setAttribute(Qt.WA_DeleteOnClose)
         titleBarWindow.show()
 
     def eventFilter(self, obj, e):
