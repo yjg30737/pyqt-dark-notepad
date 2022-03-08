@@ -1,5 +1,4 @@
 from PyQt5.QtWidgets import QApplication, qApp
-from pyqt_dark_gray_theme.darkGrayTheme import *
 from pyqt_dark_notepad import DarkNotepad
 
 from pyqt_style_setter import StyleSetter
