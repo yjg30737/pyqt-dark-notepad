@@ -28,13 +28,9 @@ class DarkNotepadApp(QApplication):
                 currentWidget = obj.getInnerWidget()
                 if currentWidget.isChanged():
                     reply = currentWidget.execWouldYouSaveMessageBox()
-                    if reply == QMessageBox.Yes:
-                        currentWidget.save()
-                        w = self.__windowDict.get(obj, 0)
-                        if w:
-                            self.__windowDict.pop(obj)
-                    elif reply == QMessageBox.No:
-                        e.accept()
+                    if reply == QMessageBox.Yes or reply == QMessageBox.No:
+                        if reply == QMessageBox.Yes:
+                            currentWidget.save()
                         w = self.__windowDict.get(obj, 0)
                         if w:
                             self.__windowDict.pop(obj)
