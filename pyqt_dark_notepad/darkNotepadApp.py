@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QApplication, qApp
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication, qApp, QMessageBox
 from pyqt_dark_notepad import DarkNotepad
 
 from pyqt_style_setter import StyleSetter
@@ -9,7 +10,7 @@ from pyqt_custom_titlebar_window import CustomTitlebarWindow
 class DarkNotepadApp(QApplication):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        qApp.installEventFilter(self)
+        self.installEventFilter(self)
         self.__windowDict = dict()
         self.__new()
 
@@ -17,16 +18,29 @@ class DarkNotepadApp(QApplication):
         mainWindow = DarkNotepad()
         mainWindow.newClicked.connect(self.__new)
         StyleSetter.setWindowStyle(mainWindow)
-        self.__titleBarWindow = CustomTitlebarSetter.getCustomTitleBar(mainWindow, icon_filename='ico/dark-notepad.svg')
-        self.__titleBarWindow.show()
+        titleBarWindow = CustomTitlebarSetter.getCustomTitleBar(mainWindow, icon_filename='ico/dark-notepad.svg')
+        titleBarWindow.show()
 
     def eventFilter(self, obj, e):
         if isinstance(obj, CustomTitlebarWindow):
             if e.type() == 17:
                 self.__windowDict[obj] = obj.winId()
-            elif e.type() == 217:
-                if e.surfaceEventType() == 1:
-                    w = self.__windowDict.get(obj, 0)
-                    if w:
-                        self.__windowDict.pop(obj)
+            elif e.type() == 19:
+                currentWidget = obj.getInnerWidget()
+                if currentWidget.isChanged():
+                    reply = currentWidget.execWouldYouSaveMessageBox()
+                    if reply == QMessageBox.Yes:
+                        currentWidget.save()
+                        w = self.__windowDict.get(obj, 0)
+                        if w:
+                            self.__windowDict.pop(obj)
+                    elif reply == QMessageBox.No:
+                        e.accept()
+                        w = self.__windowDict.get(obj, 0)
+                        if w:
+                            self.__windowDict.pop(obj)
+                    elif reply == QMessageBox.Cancel:
+                        e.ignore()
+                        return True
+
         return super().eventFilter(obj, e)

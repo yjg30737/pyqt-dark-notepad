@@ -94,19 +94,19 @@ class DarkNotepad(QMainWindow):
         # filemenu actions
         self.__newAction = QAction('New...')
         self.__newAction.setShortcut('Ctrl+N')
-        self.__newAction.triggered.connect(self.__new)
+        self.__newAction.triggered.connect(self.new)
 
         self.__openAction = QAction('Open...')
         self.__openAction.setShortcut('Ctrl+O')
-        self.__openAction.triggered.connect(self.__open)
+        self.__openAction.triggered.connect(self.open)
 
         self.__saveAction = QAction('Save...')
         self.__saveAction.setShortcut('Ctrl+S')
-        self.__saveAction.triggered.connect(self.__save)
+        self.__saveAction.triggered.connect(self.save)
 
         self.__saveAsAction = QAction('Save As...')
         self.__saveAsAction.setShortcut('Ctrl+Shift+S')
-        self.__saveAsAction.triggered.connect(self.__saveAs)
+        self.__saveAsAction.triggered.connect(self.saveAs)
 
         self.__showInExplorerAction = QAction('Show In Explorer')
         self.__showInExplorerAction.triggered.connect(self.__showInExplorer)
@@ -303,21 +303,21 @@ class DarkNotepad(QMainWindow):
         self.__new_text = self.__textEdit.toPlainText()
         self.__changed_flag = not self.__old_text == self.__new_text
 
-    def __new(self):
+    def new(self):
         self.newClicked.emit()
 
-    def __execWouldYouSaveMessageBox(self):
+    def execWouldYouSaveMessageBox(self):
         saveMsgBox = WouldYouSaveMessageBox()
         saveMsgBox.setText('Do you want to save your changes?')
         saveMsgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No | QMessageBox.Cancel)
         reply = saveMsgBox.exec()
         return reply
 
-    def __open(self):
+    def open(self):
         if self.__changed_flag:
-            reply = self.__execWouldYouSaveMessageBox()
+            reply = self.execWouldYouSaveMessageBox()
             if reply == QMessageBox.Yes:
-                self.__save()
+                self.save()
             elif reply == QMessageBox.No:
                 pass
             elif reply == QMessageBox.Cancel:
@@ -355,13 +355,13 @@ class DarkNotepad(QMainWindow):
         self.__cur_filename = filename
         self.setWindowTitle(self.__title.format(self.__cur_filename))
 
-    def __save(self):
+    def save(self):
         if self.__cur_filename == 'Untitled':
             self.__execSaveDialog()
         else:
             self.__execSave(self.__cur_filename)
 
-    def __saveAs(self):
+    def saveAs(self):
         self.__execSaveDialog()
 
     def __showInExplorer(self):
@@ -476,17 +476,8 @@ class DarkNotepad(QMainWindow):
             self.showNormal()
         self.__fullScreenAction.setChecked(f)
 
-    def closeEvent(self, e):
-        if self.__changed_flag:
-            reply = self.__execWouldYouSaveMessageBox()
-            if reply == QMessageBox.Yes:
-                self.__save()
-            elif reply == QMessageBox.No:
-                e.accept()
-            elif reply == QMessageBox.Cancel:
-                e.ignore()
-            else:
-                e.ignore()
+    def isChanged(self):
+        return self.__changed_flag
 
     def __initOpenRecentFilesActionMenu(self):
         noRecentFilesTextAction = QAction('No recent files', self)
