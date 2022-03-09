@@ -26,7 +26,8 @@ class DarkNotepadApp(QApplication):
     def eventFilter(self, obj, e):
         if isinstance(obj, CustomTitlebarWindow):
             if e.type() == 17:
-                self.__windowDict[obj] = int(obj.winId())
+                w = [c for c in obj.children() if isinstance(c, DarkNotepad)][0]
+                self.__windowDict[w] = obj
             elif e.type() == 19:
                 currentWidget = obj.getInnerWidget()
                 if currentWidget.isChanged():
@@ -42,10 +43,5 @@ class DarkNotepadApp(QApplication):
         return super().eventFilter(obj, e)
 
     def __destroyed(self, w):
-        for k, v in self.__windowDict.items():
-            if w.winId():
-                if v == int(w.winId()):
-                    self.__windowDict.pop(k)
-                    break
-            else:
-                break
+        w = [c for c in w.children() if isinstance(c, DarkNotepad)][0]
+        del(self.__windowDict[w])
