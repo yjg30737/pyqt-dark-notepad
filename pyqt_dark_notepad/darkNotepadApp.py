@@ -25,11 +25,16 @@ class DarkNotepadApp(QApplication):
 
     def eventFilter(self, obj, e):
         if isinstance(obj, CustomTitlebarWindow):
+            # catch the QShowEvent of CustomTitlebarWindow
             if e.type() == 17:
-                w = [c for c in obj.children() if isinstance(c, DarkNotepad)][0]
+                w = self.__getInnerWidget(obj)
                 self.__windowDict[w] = obj
         return super().eventFilter(obj, e)
 
     def __destroyed(self, w):
-        w = [c for c in w.children() if isinstance(c, DarkNotepad)][0]
+        w = self.__getInnerWidget(w)
         del(self.__windowDict[w])
+
+    def __getInnerWidget(self, w):
+        inner_widget = [c for c in w.children() if isinstance(c, DarkNotepad)][0]
+        return inner_widget
