@@ -8,7 +8,7 @@ setup(
     license='MIT',
     packages=find_packages(),
     package_data={'pyqt_dark_notepad.ico': ['close.svg', 'dark-notepad.svg']},
-    description='PyQt5 Dark Notepad',
+    description='PyQt Dark Notepad',
     url='https://github.com/yjg30737/pyqt-dark-notepad.git',
     install_requires=[
         'PyQt5>=5.15',
