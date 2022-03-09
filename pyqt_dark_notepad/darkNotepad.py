@@ -15,6 +15,7 @@ from pyqt_dark_notepad.wouldYouSaveMessageBox import WouldYouSaveMessageBox
 
 from pyqt_line_number_widget.lineNumberWidget import LineNumberWidget
 from pyqt_svg_icon_pushbutton import SvgIconPushButton
+from pyqt_style_setter import StyleSetter
 
 
 class DarkNotepad(QMainWindow):
@@ -84,6 +85,8 @@ class DarkNotepad(QMainWindow):
         self.__textEdit.setTextColor(self.__current_text_color)
 
         self.setMouseTracking(True)
+
+        StyleSetter.setWindowStyle(self)
 
     # todo make line widget successfully interact with zoom in, out, backspace in the middle of text widget
     def __lineWidgetLineCountChanged(self):
