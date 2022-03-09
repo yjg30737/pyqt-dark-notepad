@@ -28,18 +28,6 @@ class DarkNotepadApp(QApplication):
             if e.type() == 17:
                 w = [c for c in obj.children() if isinstance(c, DarkNotepad)][0]
                 self.__windowDict[w] = obj
-            elif e.type() == 19:
-                currentWidget = obj.getInnerWidget()
-                if currentWidget.isChanged():
-                    reply = currentWidget.execWouldYouSaveMessageBox()
-                    if reply == QMessageBox.Yes or reply == QMessageBox.No:
-                        if reply == QMessageBox.Yes:
-                            currentWidget.save()
-                    elif reply == QMessageBox.Cancel:
-                        e.ignore()
-                        return True
-                else:
-                    pass
         return super().eventFilter(obj, e)
 
     def __destroyed(self, w):
