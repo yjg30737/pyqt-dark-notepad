@@ -8,6 +8,7 @@ Line edit widget doesn't properly work if text widget's font family is not Gulim
 * PyQt5 >= 5.15
 
 ## Included pacakges
+* <a href="https://github.com/yjg30737/pyqt-style-setter.git">pyqt-style-setter</a> - For dark-gray style
 * <a href="https://github.com/yjg30737/pyqt-find-replace-text-widget.git">pyqt-find-replace-text-widget</a>
 * <a href="https://github.com/yjg30737/pyqt-font-dialog.git">pyqt-font-dialog</a>
 * <a href="https://github.com/yjg30737/pyqt-color-dialog.git">pyqt-color-dialog</a>
