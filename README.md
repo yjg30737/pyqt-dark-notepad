@@ -2,7 +2,7 @@
 PyQt Dark Notepad
 
 ## Note
-Line edit widget doesn't properly work after font family setting as different type from main text widget's.
+Line edit widget doesn't properly work if text widget's font family is not Gulim.
 
 ## Requirements
 * PyQt5 >= 5.15
