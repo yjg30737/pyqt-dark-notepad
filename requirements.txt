@@ -6,3 +6,4 @@ git+https://git@github.com/yjg30737/pyqt-font-dialog.git@main
 git+https://git@github.com/yjg30737/pyqt-color-dialog.git@main
 git+https://git@github.com/yjg30737/pyqt-line-number-widget.git@main
 git+https://git@github.com/yjg30737/pyqt-svg-icon-pushbutton.git@main
+git+https://git@github.com/yjg30737/pyqt-new-window-handler.git@main
