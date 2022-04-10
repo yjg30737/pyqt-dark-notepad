@@ -23,6 +23,10 @@ class DarkNotepad(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        self.__initVal()
+
+    def __initVal(self):
+        self.__title = '{0} - Dark notepad'
         self.__default_filename = 'Untitled'
         self.__cur_filename = self.__default_filename
         self.__old_text = ''
@@ -33,7 +37,6 @@ class DarkNotepad(QMainWindow):
         self.__initUi()
 
     def __initUi(self):
-        self.__title = '{0} - Dark notepad'
         self.setWindowTitle(self.__title.format(self.__cur_filename))
 
         self.__textEdit = DarkNotepadTextEdit()
