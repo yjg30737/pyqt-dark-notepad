@@ -5,8 +5,8 @@ from PyQt5.QtCore import Qt, QPropertyAnimation, QAbstractAnimation, pyqtSignal
 
 from PyQt5.QtGui import QTextCursor, QColor
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMenuBar, QMenu, QAction, QFileDialog, qApp, QDialog, \
-    QWidget, QVBoxLayout, QMessageBox, QLabel, QHBoxLayout, QPushButton, QSlider, QFrame
-from pyqt_color_dialog import ColorPickerDialog
+    QWidget, QVBoxLayout, QMessageBox, QLabel, QHBoxLayout, QSlider
+from pyqt_color_picker import ColorPickerDialog
 from pyqt_find_replace_text_widget import FindReplaceTextWidget
 from pyqt_font_dialog import FontDialog
 
