@@ -1,5 +1,5 @@
 # pyqt-dark-notepad
-PyQt Dark Notepad
+PyQt dark notepad
 
 ## Note
 Line edit widget doesn't properly work if text widget's font family is not Gulim.
@@ -11,14 +11,14 @@ Line edit widget doesn't properly work if text widget's font family is not Gulim
 * <a href="https://github.com/yjg30737/pyqt-style-setter.git">pyqt-style-setter</a> - For theme
 * <a href="https://github.com/yjg30737/pyqt-find-replace-text-widget.git">pyqt-find-replace-text-widget</a>
 * <a href="https://github.com/yjg30737/pyqt-font-dialog.git">pyqt-font-dialog</a>
-* <a href="https://github.com/yjg30737/pyqt-color-dialog.git">pyqt-color-dialog</a>
+* <a href="https://github.com/yjg30737/pyqt-color-picker.git">pyqt-color-picker</a>
 * <a href="https://github.com/yjg30737/pyqt-line-number-widget.git">pyqt-line-number-widget</a>
 * <a href="https://github.com/yjg30737/pyqt-svg-icon-pushbutton.git">pyqt-svg-icon-pushbutton</a> - For making button support svg icon
 * <a href="https://github.com/yjg30737/python-get-absolute-resource-path.git">python-get-absolute-resource-path</a>
 * <a href="https://github.com/yjg30737/pyqt-new-window-handler.git">pyqt-new-window-handler</a>
 
 ## Setup
-```pip3 install git+https://github.com/yjg30737/pyqt-dark-notepad.git --upgrade```
+`pip3 install git+https://github.com/yjg30737/pyqt-dark-notepad.git --upgrade`
 
 ## Feature
 * New, Open, Save, Save As
