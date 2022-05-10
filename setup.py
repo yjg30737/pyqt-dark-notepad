@@ -15,10 +15,10 @@ setup(
         'pyqt-style-setter @ git+https://git@github.com/yjg30737/pyqt-style-setter.git@main',
         'pyqt-find-replace-text-widget @ git+https://git@github.com/yjg30737/pyqt-find-replace-text-widget.git@main',
         'pyqt-font-dialog @ git+https://git@github.com/yjg30737/pyqt-font-dialog.git@main',
-        'pyqt-color-dialog @ git+https://git@github.com/yjg30737/pyqt-color-dialog.git@main',
+        'pyqt-color-picker>=0.0.1',
         'pyqt-line-number-widget @ git+https://git@github.com/yjg30737/pyqt-line-number-widget.git@main',
-        'pyqt-svg-icon-pushbutton @ git+https://git@github.com/yjg30737/pyqt-svg-icon-pushbutton.git@main',
-        'python-get-absolute-resource-path @ git+https://git@github.com/yjg30737/python-get-absolute-resource-path.git@main',
+        'pyqt-svg-icon-pushbutton>=0.0.1',
+        'python-get-absolute-resource-path>=0.0.1',
         'pyqt-new-window-handler @ git+https://git@github.com/yjg30737/pyqt-new-window-handler.git@main'
     ]
 )
