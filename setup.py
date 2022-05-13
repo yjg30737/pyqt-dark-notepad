@@ -13,12 +13,12 @@ setup(
     install_requires=[
         'PyQt5>=5.15',
         'pyqt-style-setter>=0.0.1',
-        'pyqt-find-replace-text-widget @ git+https://git@github.com/yjg30737/pyqt-find-replace-text-widget.git@main',
+        'pyqt-find-replace-text-widget>=0.0.1',
         'pyqt-font-dialog>=0.0.1',
         'pyqt-color-picker>=0.0.1',
         'pyqt-line-number-widget @ git+https://git@github.com/yjg30737/pyqt-line-number-widget.git@main',
         'pyqt-svg-icon-pushbutton>=0.0.1',
         'python-get-absolute-resource-path>=0.0.1',
-        'pyqt-new-window-handler @ git+https://git@github.com/yjg30737/pyqt-new-window-handler.git@main'
+        'pyqt-new-window-handler>=0.0.1'
     ]
 )
