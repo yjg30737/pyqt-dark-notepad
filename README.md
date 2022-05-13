@@ -14,7 +14,7 @@ Line edit widget doesn't properly work if text widget's font family is not Gulim
 * <a href="https://github.com/yjg30737/pyqt-color-picker.git">pyqt-color-picker</a>
 * <a href="https://github.com/yjg30737/pyqt-line-number-widget.git">pyqt-line-number-widget</a>
 * <a href="https://github.com/yjg30737/pyqt-svg-icon-pushbutton.git">pyqt-svg-icon-pushbutton</a> - For making button support svg icon
-* <a href="https://github.com/yjg30737/python-get-absolute-resource-path.git">python-get-absolute-resource-path</a>
+* <a href="https://github.com/yjg30737/absresgetter.git">absresgetter</a>
 * <a href="https://github.com/yjg30737/pyqt-new-window-handler.git">pyqt-new-window-handler</a>
 
 ## Setup
