@@ -14,7 +14,7 @@ from pyqt_dark_notepad.darkNotepadTextEdit import DarkNotepadTextEdit
 from pyqt_dark_notepad.wouldYouSaveMessageBox import WouldYouSaveMessageBox
 
 from pyqt_line_number_widget.lineNumberWidget import LineNumberWidget
-from pyqt_svg_icon_pushbutton import SvgIconPushButton
+from pyqt_svg_button import SvgButton
 from pyqt_style_setter import StyleSetter
 
 
@@ -203,7 +203,7 @@ class DarkNotepad(QMainWindow):
         self.__menubar.addMenu(formatmenu)
         self.__menubar.addMenu(viewmenu)
 
-        self.__showToggleBtn = SvgIconPushButton(self.__menubar)
+        self.__showToggleBtn = SvgButton(self.__menubar)
         self.__showToggleBtn.clicked.connect(self.__closeMenu)
         self.__showToggleBtn.setToolTip('Hide the menu bar')
         self.__showToggleBtn.setIcon('ico/close.svg')
