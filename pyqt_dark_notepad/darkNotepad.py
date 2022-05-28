@@ -209,7 +209,7 @@ class DarkNotepad(QMainWindow):
         self.__showToggleBtn.setIcon('ico/close.svg')
 
         # prevent the menu height from being set to corner widget size which make menu bar look awkward
-        height = self.__menubar.sizeHint().height()
+        height = self.__menubar.sizeHint().height()-5
 
         self.__menubar.setCornerWidget(self.__showToggleBtn)
 
@@ -512,11 +512,3 @@ class DarkNotepad(QMainWindow):
                 e.ignore()
             else:
                 e.ignore()
-
-if __name__ == "__main__":
-    import sys
-
-    app = QApplication(sys.argv)
-    darkNotepad = DarkNotepad()
-    darkNotepad.show()
-    sys.exit(app.exec_())
