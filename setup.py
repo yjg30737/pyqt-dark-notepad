@@ -16,7 +16,7 @@ setup(
         'pyqt-find-replace-text-widget>=0.0.1',
         'pyqt-font-dialog>=0.0.1',
         'pyqt-color-picker>=0.0.1',
-        'pyqt-line-number-widget @ git+https://git@github.com/yjg30737/pyqt-line-number-widget.git@main',
+        'pyqt-line-number-widget>=0.0.1',
         'pyqt-svg-button>=0.0.1',
         'absresgetter>=0.0.1',
         'pyqt-new-window-handler>=0.0.1'
