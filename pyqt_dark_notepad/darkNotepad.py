@@ -4,7 +4,7 @@ import subprocess
 from PyQt5.QtCore import Qt, QPropertyAnimation, QAbstractAnimation, pyqtSignal
 
 from PyQt5.QtGui import QTextCursor, QColor
-from PyQt5.QtWidgets import QMainWindow, QApplication, QMenuBar, QMenu, QAction, QFileDialog, qApp, QDialog, \
+from PyQt5.QtWidgets import QMainWindow, QMenuBar, QMenu, QAction, QFileDialog, qApp, QDialog, \
     QWidget, QVBoxLayout, QMessageBox, QLabel, QHBoxLayout, QSlider
 from pyqt_color_picker import ColorPickerDialog
 from pyqt_find_replace_text_widget import FindReplaceTextWidget
