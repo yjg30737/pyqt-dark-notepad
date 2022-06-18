@@ -234,26 +234,16 @@ class DarkNotepad(QMainWindow):
         text = self.__zoomScaleText.format(self.__textEdit.getScale())
         self.__zoomScaleLabel = QLabel()
         self.__zoomScaleLabel.setText(text)
-        self.__zoomScaleLabel.setMaximumWidth(self.__zoomScaleLabel.fontMetrics().boundingRect(text).width()+5)
 
         self.__zoomScaleSlider = QSlider()
         self.__zoomScaleSlider.setOrientation(Qt.Horizontal)
-        self.__zoomScaleSlider.setMaximumWidth(100)
         self.__zoomScaleSlider.setRange(10, 400)
         self.__zoomScaleSlider.setValue(self.__textEdit.getScale())
         self.__zoomScaleSlider.valueChanged.connect(self.__zoomScaleSliderValueChanged)
 
         self.__zoomScaleSlider.setTickInterval(10)
         self.__zoomScaleSlider.setSingleStep(10)
-
-        lay = QHBoxLayout()
-        lay.setAlignment(Qt.AlignRight)
-        lay.addWidget(self.__zoomScaleLabel)
-        lay.addWidget(self.__zoomScaleSlider)
-        lay.setContentsMargins(0, 0, 0, 0)
-
-        self.__zoomScaleWidget = QWidget()
-        self.__zoomScaleWidget.setLayout(lay)
+        self.__zoomScaleSlider.setMaximumWidth(self.__zoomScaleSlider.sizeHint().width())
 
         self.__fontLabelText = '{0}, {1}pt'
         self.__fontLabel = QLabel()
@@ -270,7 +260,8 @@ class DarkNotepad(QMainWindow):
         self.__charsLinesCountText = '{0} chars, {1} lines'
         self.__charsLinesCountLabel = QLabel()
 
-        self.__statusBar.addPermanentWidget(self.__zoomScaleWidget)
+        self.__statusBar.addPermanentWidget(self.__zoomScaleLabel)
+        self.__statusBar.addPermanentWidget(self.__zoomScaleSlider)
         self.__statusBar.addPermanentWidget(self.__colorLabel)
         self.__statusBar.addPermanentWidget(self.__fontLabel)
         self.__statusBar.addPermanentWidget(self.__rcLabel)
