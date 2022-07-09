@@ -4,5 +4,4 @@ pyqt-font-dialog>=0.0.1
 pyqt-color-picker>=0.0.1
 pyqt-line-number-widget>=0.0.1
 pyqt-svg-button>=0.0.1
-absresgetter>=0.0.1
 pyqt-new-window-handler>=0.0.1
