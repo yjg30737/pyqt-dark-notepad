@@ -140,11 +140,11 @@ class DarkNotepadTextEdit(QTextEdit):
             else:
                 print('not selected')
         '''
-        # todo num_pad zoomIn/zoomOut feature
-        num_pad_zoom_in_out_feature = '''
-        elif e.matches(QKeySequence.ZoomIn):
-            print('zoomIn')
+        # zoomin/out with ctrl + numpad plus/minus shortcut feature
+        if e.matches(QKeySequence.ZoomIn):
+            self.zoomIn()
+            return
         elif e.matches(QKeySequence.ZoomOut):
-            print('zoomOut')
-        '''
+            self.zoomOut()
+            return
         return super().keyPressEvent(e)
