@@ -129,6 +129,7 @@ class DarkNotepadTextEdit(QTextEdit):
         self.__showInExplorerAction.setEnabled(True)
 
     def keyPressEvent(self, e):
+        # todo tab/backtab key feature
         tap_key_feature_code = '''
         if e.key() == Qt.Key_Tab:
             print('tab key pressed')

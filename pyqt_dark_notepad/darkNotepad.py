@@ -3,7 +3,7 @@ import subprocess
 
 from PyQt5.QtCore import Qt, QPropertyAnimation, QAbstractAnimation, pyqtSignal
 
-from PyQt5.QtGui import QTextCursor, QColor
+from PyQt5.QtGui import QTextCursor, QColor, QTextOption
 from PyQt5.QtWidgets import QMainWindow, QMenuBar, QMenu, QAction, QFileDialog, qApp, QDialog, \
     QWidget, QVBoxLayout, QMessageBox, QLabel, QHBoxLayout, QSlider
 from pyqt_color_picker import ColorPickerDialog
@@ -48,6 +48,13 @@ class DarkNotepad(QMainWindow):
         self.__textEdit.zoomSignal.connect(self.__zoomByWheel)
         self.__textEdit.cursorOnTop.connect(self.__showMenu)
         self.__textEdit.showInExplorer.connect(self.__showInExplorer)
+
+        # todo space tab visible code (should be an option)
+        space_tab_visible_code = '''
+        textOptions = self.__textEdit.document().defaultTextOption()
+        textOptions.setFlags(textOptions.flags() | QTextOption.ShowTabsAndSpaces)
+        self.__textEdit.document().setDefaultTextOption(textOptions)
+        '''
 
         # Declare find widget in advance
         self.__findReplaceWidget = FindReplaceTextWidget(self.__textEdit)
