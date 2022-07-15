@@ -481,8 +481,14 @@ class DarkNotepad(QMainWindow):
     def keyPressEvent(self, e):
         if e.key() == Qt.Key_F11:
             self.__fullScreenToggled(not self.isFullScreen())
-        if e.key() == Qt.Key_Escape:
+        elif e.key() == Qt.Key_Escape:
             self.__fullScreenToggled(False)
+        # zoom in
+        elif e.key() == 61:
+            self.__zoomIn()
+        # zoom out
+        elif e.key() == 45:
+            self.__zoomOut()
         return super().keyPressEvent(e)
 
     def mouseMoveEvent(self, e):
