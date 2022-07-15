@@ -1,3 +1,4 @@
+from PyQt5.QtGui import QKeySequence
 from PyQt5.QtCore import pyqtSignal, Qt
 from PyQt5.QtWidgets import QTextEdit, QApplication, QAction
 
@@ -138,5 +139,12 @@ class DarkNotepadTextEdit(QTextEdit):
                 print('')
             else:
                 print('not selected')
+        '''
+        # todo num_pad zoomIn/zoomOut feature
+        num_pad_zoom_in_out_feature = '''
+        elif e.matches(QKeySequence.ZoomIn):
+            print('zoomIn')
+        elif e.matches(QKeySequence.ZoomOut):
+            print('zoomOut')
         '''
         return super().keyPressEvent(e)
