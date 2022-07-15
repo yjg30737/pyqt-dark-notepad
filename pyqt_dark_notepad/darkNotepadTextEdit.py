@@ -127,3 +127,15 @@ class DarkNotepadTextEdit(QTextEdit):
         self.__filename = filename
         self.setText(contents)
         self.__showInExplorerAction.setEnabled(True)
+
+    def keyPressEvent(self, e):
+        tap_key_feature_code = '''
+        if e.key() == Qt.Key_Tab:
+            print('tab key pressed')
+            tc = self.textCursor()
+            if tc.hasSelection():
+                print('')
+            else:
+                print('not selected')
+        '''
+        return super().keyPressEvent(e)
