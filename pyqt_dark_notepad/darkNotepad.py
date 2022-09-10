@@ -3,7 +3,7 @@ import subprocess
 
 from PyQt5.QtCore import Qt, QPropertyAnimation, QAbstractAnimation, pyqtSignal
 
-from PyQt5.QtGui import QTextCursor, QColor, QTextOption
+from PyQt5.QtGui import QTextCursor, QColor
 from PyQt5.QtWidgets import QMainWindow, QMenuBar, QMenu, QAction, QFileDialog, qApp, QDialog, \
     QWidget, QVBoxLayout, QMessageBox, QLabel, QHBoxLayout, QSlider
 from pyqt_color_picker import ColorPickerDialog
@@ -442,7 +442,7 @@ class DarkNotepad(QMainWindow):
             tc.movePosition(QTextCursor.Start)
 
             # Set text color of textedit in general
-            self.__textEdit.setTextColor(color)
+            self.__textEdit.setStyleSheet(f'QTextEdit {{ color: {color.name()} }}')
             self.__colorLabel.setText(self.__colorLabelText.format(color.name()))
 
     def __zoomByWheel(self, n):
